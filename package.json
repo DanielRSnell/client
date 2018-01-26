@@ -1,0 +1,40 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@antv/g2": "^3.0.4-beta.2",
+    "antd": "^3.1.1",
+    "apollo-client-preset": "^1.0.6",
+    "apollo-link-http": "^1.3.2",
+    "axios": "^0.17.1",
+    "cors": "^2.8.4",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
+    "highcharts": "^6.0.4",
+    "moment": "^2.20.1",
+    "now": "^9.2.7",
+    "numeral": "^2.0.6",
+    "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
+    "react-dom": "^16.2.0",
+    "react-moment": "^0.6.8",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "react-twitter-widgets": "^1.7.1",
+    "serve": "^6.4.4"
+  },
+  "now": {
+    "alias": "hackcoin-client"
+  },
+  "scripts": {
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.6.3"
+  }
+}

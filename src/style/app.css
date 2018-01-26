@@ -1,0 +1,396 @@
+.main-container {
+    margin-top: 4em;
+}
+
+.ant-menu-item.item-left {
+    float: right!important;
+}
+
+.ant-table-pagination.ant-pagination {
+    margin: 1em!important;
+}
+
+.example {
+    text-align: center;
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 30px 50px;
+    margin: 20px 0;
+  }
+
+  .ant-carousel .slick-slide {
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+  }
+  
+  .ant-carousel .slick-slide h3 {
+    color: #fff;
+  }
+
+  .slider-home {
+   margin-top: 2em;
+   margin-bottom: 2em;
+  }
+
+.global-home {
+    margin-bottom: 2em!important;
+}
+
+.filter-home {
+    margin-bottom: -1.5em;
+}
+
+.search-input {
+    margin-top: 2em!important;
+}
+
+.global-side-row {
+    padding-bottom: .25em;
+}
+
+.cards-home {
+    padding-bottom: 2em;
+}
+
+.ant-progress-inner {
+    width: 8em!important;
+    height: 8em!important;
+    font-size: .75em!important;
+}
+
+.home-headline-row {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.home-header-subtitle {
+    font-size: 1.5em;
+    color: gray;
+}
+
+.brand-logo {
+    width: 13em;
+}
+
+.search-item {
+    color: #000;
+}
+
+.table-image {
+    width: 45%;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    background: #fff;
+    padding: 5px;
+    float: left;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ico-table {
+    margin-top: 2em;
+}
+
+.table-tag {
+    font-size: 1em!important;
+}
+
+.table-image-2 {
+    width: 9.25em;
+}
+
+.options-bar {
+    margin-bottom: 1em;
+    margin-top: 2em;
+}
+
+.stat-box {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    border-radius: 4px;
+    margin: 0 0 10px 0;
+    padding: 20px;
+    text-align: center;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ico-profile-logo {
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    background: #fff;
+    padding: 5px;
+    width: 97px;
+    height: 97px;
+    float: left;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.profile-header {
+    overflow: hidden;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+.header-profile {
+    font-size: 36px;
+    line-height: 1;
+    color: #222;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    margin: 15px 0 2px 0;
+    padding: 0;
+    float: left;
+    width: calc(100% - 55px);
+}
+
+.header-tagline {
+    font-size: 28px;
+    line-height: 1;
+    color: #222;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 200;
+    margin: 0;
+    padding: 0;
+    clear: both;
+}
+
+.profile-header {
+    overflow: hidden;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+.page-part-one {
+    margin: 10;
+    padding: 10;
+}
+
+.ico-information {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #313131;
+    margin: 0 0 15px 0;
+    text-align: left;
+}
+
+.ant-tag .ico-tags {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    padding: 8px 15px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 1.1;
+    color: #313131;
+}
+
+.ico-rating-main {
+    font-size: 48px;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+    display: inline-block;
+}
+
+.ico-rating-item {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+}
+
+.ico-rating-field {
+    font-size: 10px;
+    color: #a4a4a4;
+    text-transform: uppercase;
+    display: block;
+    margin: 2px 0 0 0;
+    font-weight: 400;
+}
+
+.ico-rating-experts {
+    text-align: center;
+    font-size: 14px;
+    color: #a4a4a4;
+    display: block;
+    margin: 6px 0 0 0;
+    font-weight: 400;
+}
+
+.ico-date {
+    font-weight: bold;
+}
+
+.ico-video-container {
+    margin-top: 2em;
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    border-radius: .25em;
+    padding: .25em;
+    text-align: center;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ico-video-asset {
+    padding: 1em;
+}
+
+.ico-video-message {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    border-radius: .25em;
+    padding: .25em;
+    text-align: center
+}
+
+.ico-exchange-image {
+    width: 3.25em;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0);
+    margin-bottom: .5em;
+    margin-top: .25em;
+}
+
+.profile-container {
+    margin-top: 2em;
+}
+
+.ico-about-page {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 2;
+    color: #524e4e;
+    cursor: default;
+    font-family: 'Open Sans',sans-serif;
+}
+
+.twitter-widget-holder {
+    margin-top: 1.5em!important;
+    height: auto;
+    min-height: 700px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.twitter-title {
+    padding: 0 10px 10px 10px;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #313131;
+    font-weight: bold;
+}
+
+.profile-container-bottom {
+    margin-top: 3em;
+    box-sizing: border-box;
+    padding: 0px;
+    text-align: left;
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-details {
+    margin-top: 2em!important;
+}
+
+.finanical-box {
+
+    margin-bottom: 2em;
+
+}
+
+.social-info {
+    margin: 1em;
+}
+
+.search-image {
+    width: 12.5%;
+}
+
+.coin-profile-image {
+    width: 6em;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    background: #fff;
+    padding: 5px;
+    float: left;
+    margin: .25em;
+}
+
+.coin-profile-header {
+    font-size: 36px;
+    line-height: 1;
+    color: #222;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    margin: 15px 0 2px 0;
+    padding: 0;
+    float: left;
+    width: calc(100% - 55px);
+}
+
+.coin-profile-subheader {
+    font-size: 20px;
+    line-height: 1;
+    color: #222;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 300;
+    clear: both;
+}
+
+.profile-stat-box-section {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    border-radius: 4px;
+    margin: 0 0 10px 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-title {
+    font-size: 12px;
+    color: #a4a4a4;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 0 0 0;
+    font-weight: bold;
+}
+
+.stat-number {
+    font-size: 14px;
+    color: #5b5b5b;
+    text-transform: uppercase;
+    display: block;
+    margin: 2px 0 0 0;
+    font-weight: 600;
+}
+
+.profile-coin-bottom {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    border-radius: 4px;
+    margin: 0 0 10px 0;
+    padding: 20px;
+    text-align: left;
+}
+
+.profile-about-section {
+    margin: 1em;
+}
