@@ -80,48 +80,12 @@ class Home extends Component {
 
     render() { 
 
-      if ( this.props.coins.loading ) {
-        return (
-          <Content style={{margin: 10}}>
-          <Row span={24} type="flex" justify="center" className="home-headline-row">
-          <Col span={12} className="home-headline-column">
-          <center>
-            <h1>WELCOME TO HACKCOIN</h1>
-            <Divider />
-            <span className="home-header-subtitle">
-              THE <strong>WORLD'S LARGEST</strong> CRYPTO GRAPHQL NETWORK.
-            </span>
-            </center>
-            </Col>  
-          </Row> 
-            <Row span={22} type="flex" className="filter-home">
-            <Col span={5} push={2} style={{margin: 10}}>
-            <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-                <strong>TOTAL MARKETCAP:</strong> Loading...
-              </Content>
-              </Col>
-              <Col span={5} push={2} style={{margin: 10}}>
-            <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-              <strong>DAILY VOLUME:</strong> Loading...
-              </Content>
-              </Col>
-              <Col span={5} push={2} style={{margin: 10}}>
-            <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-              <strong>BITCOIN DOMINANCE:</strong> Loading...
-              </Content>
-              </Col>
-              <Col span={5} push={2} type="flex" justify="center" style={{margin: 10}}>
-              <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
-                </Col>
-            </Row>
-            <Row>
-              <CoinsRanked data={this.props} loading={true} />
-            </Row>
-          </Content>
-              );
-      }
-
-       return ( 
+      const data = this.props.coins;
+      const glob = this.props.coins.global;
+      
+       return (
+    <div>
+      {!glob && <h1>Loading....</h1>} 
        <Content style={{margin: 10}}>
         <Row span={24} type="flex" justify="center" className="home-headline-row">
         <Col span={12} className="home-headline-column">
@@ -134,8 +98,8 @@ class Home extends Component {
           </center>
           </Col>  
         </Row> 
-          <Row span={22} type="flex" className="filter-home">
-          <Col span={5} push={2} style={{margin: 10}}>
+          <Row span={24} type="flex" className="filter-home">
+          <Col span={5} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
               <strong>TOTAL MARKETCAP:</strong> {
               
@@ -144,7 +108,7 @@ class Home extends Component {
               }
             </Content>
             </Col>
-            <Col span={5} push={2} style={{margin: 10}}>
+            <Col span={5}  style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
             <strong>DAILY VOLUME:</strong> {
             
@@ -153,12 +117,12 @@ class Home extends Component {
             }
             </Content>
             </Col>
-            <Col span={5} push={2} style={{margin: 10}}>
+            <Col span={5} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
             <strong>BITCOIN DOMINANCE:</strong> {this.CheckDom(this.props.coins)}%
             </Content>
             </Col>
-            <Col span={5} push={2} type="flex" justify="center" style={{margin: 10}}>
+            <Col span={5} push={4} style={{margin: 10}}>
             <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
               </Col>
           </Row>
@@ -166,7 +130,8 @@ class Home extends Component {
             <CoinsRanked data={this.props} loading={false} />
           </Row>
         </Content>
-       );
+      </div> 
+      );
     }
 }
 

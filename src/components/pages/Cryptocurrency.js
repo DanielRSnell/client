@@ -195,32 +195,12 @@ CreateTwitter(props) {
 
     render() {    
 
-        		
-		if ( this.props.data.loading ) {
-            
-            return (
-        <div className="example">   
-
-            <Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!">
-
-              </Spin>
-              </div>
-            );
-        } 
-        
-        if ( this.props.data.error ) {
-            
-            
-
-            return ( <div className="example">
-
-                <Spin tip="Woops, looks like there was an error" />
-
-                </div> );
-        }
-
+        const data = this.props.data.allCoinProfiles;
 
         return (
+            <div>
+            {!data && <h1>Loading...</h1>}
+            {data && data.map( item => (
             <Layout className="container">
             <Row span={24}  style={{margin: 10}}>
             <Col span={22} push={1} style={{ padding: 0}}>
@@ -316,14 +296,16 @@ CreateTwitter(props) {
                     </Row>
                     <Row span={24} justify="center" style={{margin: 10, padding: 0}}>
                     
-                        {this.CreateExchangeList(this.props.data.allCoinProfiles[0])}
+                        {this.CreateExchangeList(item)}
                     
                     </Row>
                     
                 </Row>
-                
+
             </Layout>
-        );
+        ))}
+        </div>
+        )
     }
 }
 

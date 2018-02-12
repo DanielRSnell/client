@@ -155,21 +155,21 @@ LargeConvertMarket(props) {
         sortedInfo = sortedInfo || {};
 
         filteredInfo = filteredInfo || {};
-
+        const data = this.props.data.coins.allCoinProfiles;
      
         return (
        // <div> This is a test div </div>
         <Row type="flex" span={24} justify="center">
             
-            <Col span={22} value={5}>
+            <Col span={24} value={5}>
             <Content style={{ background: '#fff', padding: 0, margin: 0, minHeight: 280 }}>
             <Table
             loading={this.props.loading}
             size="default"
-            bordered={false}
+            bordered={true}
             indentSize={20}
             pagination={{ pageSize: 300}}
-            dataSource={this.props.data.coins.allCoinProfiles}
+            dataSource={data}
             onRowClick={ (item) => this.rowClickHandler(item.symbol)}
             rowKey={item => item.id}
             onChange={this.handleChange}
