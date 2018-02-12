@@ -11,90 +11,82 @@ class SearchInput extends Component {
     store: [],
   }
 
-  componentDidMount() {
-    this.prepSearch();
+  componentWillMount() {
+    if ( this.props.data.coins.loading !== true ) {
+    
+      this.prepSearch();
+
+    }
+
   }
   
-  prepSearch() {
+  prepSearch(value) {
     
-    const Values = Object.values(this.props.data.coins.coins_rank);
+    if ( this.props.data.coins.loading === false ) {
+
+    const data = this.props.data.coins.allCoinProfiles;
     
     const Store = [];
-    const Arr = [];
-    Store.push({ value: ''+'1',
-                  text: ''});
-    Values.forEach(item => {
 
-      if ( item !== null ) {
-        const itemName = item.name.toUpperCase();
-        const itemSymbol = item.symbol.toUpperCase();
-        
-        Arr.push({ value: itemSymbol + '1',
-                     id: item.symbol, 
-                     img: `https://files.coinmarketcap.com/static/img/coins/16x16/${item.img}.png`,
-                    text: item.name + ' ' +`( ${item.symbol} )`});
-      }
-      if ( Store < 5 ) {
-        const itemName = item.name.toUpperCase();
-        const itemSymbol = item.symbol.toUpperCase();
-        Store.push({ value: itemName + ' ' + itemSymbol + '1',
-                     id: item.symbol, 
-                     img: `https://files.coinmarketcap.com/static/img/coins/16x16/${item.img}.png`,
-                    text: item.name + ' ' +`( ${item.symbol} )`});
-      }
+            data.forEach(item => {
 
-    });
+              if ( Store.length < 5 ) {
+              
+              if ( item.name && item.symbol !== undefined ) {
+                
+              const row = `${item.name + '-' + item.symbol}`.toLowerCase();
+              
+              if ( value !== undefined ) { 
+
+              const low = value.toLowerCase();
+
+              const check = row.includes(low);
+
+              if ( check === true ) {
+
+              Store.push({
+
+                value: `${item.symbol.toUpperCase()}`,
+                text: item.name,
+                id: item.symbol,
+                img: item.cmc
+
+              });
+
+              
+            }
+          
+          }
+
+        }
+      }
+  
+});
+
     this.setState({ data: Store });
-    this.setState({ store: Arr });
+
+  }
+    
   }
 
   handleChange = (value, id) => {
    
+    this.prepSearch(value);
 
-      this.prepSearch();
-
-    const arr = Object.values(this.state.store);
-
-    const Store = [];
-
-    arr.forEach( item => {
-
-    if (Store.length < 5 ) {
-      const itemName = value.toString().toUpperCase();
-
-      const results = item.value.includes(itemName);
-
-      if ( results === true ) {
-        console.log(Store.length);
-        Store.push(item);
-        console.log(item);
-      }
-    }
-    });
-    if ( value === '' ) {
-      this.setState({data: Store});
-      this.setState({ value });   
-     
-      } else { 
-
-        this.setState({data: Store});
-        this.setState({ value });  
-        
-      }
+    this.setState({value: value});
+    
   }
 
-  OnSelectHandler = (id, value, option) => {
-    const Format = id.replace(/\s+/g, '-').toLowerCase();
-    const reFormat = Format.replace(/1/g, ''); 
-    this.props.data.history.push(`/cryptocurrency/` + reFormat);
+  OnSelectHandler = (id, symbol) => {
+    this.props.data.history.push(`/cryptocurrency/` + id.toUpperCase());
   }
 
   render() {
-    console.log(`Search Component`);
+
     const options = this.state.data.map(item => 
       <Option key={item.value}>
      <Link to={`/cryptocurrency/${item.id}`}>
-      {` `}<img src={item.img} />
+      {` `}<img src={"https://files.coinmarketcap.com/static/img/coins/32x32/" + item.img + ".png"} />
       <span className="search-item">{` `}<strong><Divider type="vertical" />{' '}{item.text}</strong></span>
       </Link>
       </Option>

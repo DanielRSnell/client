@@ -101,6 +101,7 @@ class SearchIco extends Component {
   }
 
   render() {
+    
     const options = this.state.data.map(item => 
       <Option key={item.value}>
      <Link to={`/ico/${item.uid}`}>

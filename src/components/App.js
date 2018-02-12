@@ -30,7 +30,7 @@ import IcoProfile from './pages/IcoProfile';
 import IcoList from './pages/ico/IcoList';
 
 // Testing Grounds - Where we build things 
-
+import Test from '../test/test';
 const { Footer } = Layout;
 
 // View State Starts Here
@@ -52,6 +52,7 @@ class App extends Component {
 							<Route exact={true} path="/cryptocurrency/:id" component={Cryptocurrency} />
 							<Route exact={true} path="/all-icos" component={IcoList} />
 							<Route exact={true} path="/ico/:id" component={IcoProfile} />
+							<Route exact={true} path="/test" component={Test} />
 							<Footer style={{ textAlign: 'center' }}>
 
 							<strong>Hackcoin</strong> ©2017 <strong>Kickass Data</strong> and <strong>Unicorns</strong>.

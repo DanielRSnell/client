@@ -5,19 +5,14 @@ import ReactDOM from 'react-dom';
 // 1
 
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client-preset';
-import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import client from './apollo';
 
-// 2
+
+
+
+// 2 - Connect Application
 import App from './components/App';
 
-// 3 
-const client = new ApolloClient({
-	link: createHttpLink({ uri: 'https://graph-hackcoin.now.sh/graphql' }),
-	cache: new InMemoryCache(),
-	dataIdFromObject: o => o.id
-});
 
 
 

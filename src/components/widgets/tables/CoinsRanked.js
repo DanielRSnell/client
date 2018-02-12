@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Router, history } from 'react-router-dom';
-import { Row, Col, Layout, Table, Select, Button } from 'antd';
-import axios from 'axios';
+import { Row, Col, Layout, Table } from 'antd';
 import n from 'numeral';
 
 
@@ -14,7 +12,6 @@ class CoinsRanked extends Component {
 
         state = { 
             data: null,
-            loading: false,
             PageSize: 100,
             filteredInfo: null,
             sortedInfo: null,
@@ -36,11 +33,6 @@ class CoinsRanked extends Component {
             console.log(info);
         }
 
-        componentDidMount() {
-            console.log(`Component is updated`);
-            this.setState({loading: false});
-        }
-
 
     handleChange = (pagination, filters, sorter) =>{
         console.log('Various paramaters', pagination, filters, sorter);
@@ -51,29 +43,19 @@ class CoinsRanked extends Component {
     }
 
     componentWillMount() {
-        this.setState({ loading: true });
+        if ( this.props.loading === false ) {
+    
         this.setState({ PageSize: 100 });
-        this.CreateTable();
+        this.setState({ loading: false });
+        
+    } else { 
+
+            this.setState({loading: true});
+        
+        }
     }
 
-    CreateTable() {
-
-        const Values = Object.values(this.props.data.coins.coins_rank);
-        
-
-        Values.forEach( item => {
-            
-            if ( item !== null ) {
-
-                ChartData.push(item);
-                
-            }
-
-        });
-
-        this.setState({ data: ChartData });
-
-
+    componentDidUpdate() {
     }
 
     FormatInt(props) {
@@ -120,21 +102,41 @@ class CoinsRanked extends Component {
        return (<span><strong>{reFormat}</strong></span>);
    }
 
-   LargeConvertDollar(props) {
+   LargeConvertVolume(props) {
+    if ( props !== null ) {
+    const convertNumber = parseInt(props.volume);
+    const number = n(convertNumber);
+    n.defaultFormat(`$0,0`);
+    const reFormat = number.format();
+    return (<span><strong>{reFormat}</strong></span>);
+    } else {
+        return "Unknown";
+    }
+}
+
+LargeConvertMarket(props) {
+    if ( props !== null ) {
     const convertNumber = parseInt(props);
     const number = n(convertNumber);
     n.defaultFormat(`$0,0`);
     const reFormat = number.format();
     return (<span><strong>{reFormat}</strong></span>);
+    } else {
+        return "Unknown";
+    }
 }
 
 
    CheckSymbol(props) {
        if ( props !== 'MIOTA' ) {
+
            return ( <span>( <strong>{props}</strong> ) </span> )
-       } else {
-           return ( <span>( <strong>IOT</strong> ) </span> )
-       }
+       
+        } else {
+       
+            return ( <span>( <strong>IOT</strong> ) </span> )
+       
+        }
     }
 
    rowClickHandler(symbol) {
@@ -153,79 +155,76 @@ class CoinsRanked extends Component {
         sortedInfo = sortedInfo || {};
 
         filteredInfo = filteredInfo || {};
+
      
         return (
        // <div> This is a test div </div>
         <Row type="flex" span={24} justify="center">
             
-            <Col span={20} value={5}>
+            <Col span={22} value={5}>
             <Content style={{ background: '#fff', padding: 0, margin: 0, minHeight: 280 }}>
-        
             <Table
-            loading={this.state.loading}
+            loading={this.props.loading}
             size="default"
             bordered={false}
             indentSize={20}
-            pagination={{ pageSize: 100}}
-            dataSource={this.state.data}
+            pagination={{ pageSize: 300}}
+            dataSource={this.props.data.coins.allCoinProfiles}
             onRowClick={ (item) => this.rowClickHandler(item.symbol)}
-            rowKey={item => item.id + '-' + item._rank}
+            rowKey={item => item.id}
             onChange={this.handleChange}
             >
-
+            
             <Column
             key='rank'
             title="RANK"
-            render={item => {return <center><span><h3>{item._rank}</h3></span></center>;}}
+            render={item => {return <center>{item.rank}</center>;}}
             />
             
             <Column
-                key='id'
-				render={item => (
-		    <center><img src={ 
-            'https://files.coinmarketcap.com/static/img/coins/32x32/' + item.img + '.png' }/>
-        </center> )}
-								/>
-
+            key='id'
+            render={item => (<img src={item.coinImage.image32} /> )}
+            />
+            
             <Column
             key='name'
-            render={item => ( <span><h3>{item.name}</h3></span> )}
+            render={item => ( item.name )}
             />
             
             <Column
             key='volume'
             title="VOLUME"
-            render={item => { return this.LargeConvertDollar(item.volume) }}
+            render={item => { return this.LargeConvertVolume(item.coinCap) }}
             />
-
+            
             <Column
             key='market_cap_usd'
             title="MARKET CAP"
-            render={item => { return this.LargeConvertDollar(item.market_cap_usd); }}
+            render={item => { return this.LargeConvertMarket(item.marketcap); }}
             />
-
+            
             <Column
             key='price_usd'
             title="PRICE"
-            render={item => { return this.ConvertDollar(item.price_usd) }}
+            render={item => { return this.ConvertDollar(item.price) }}
             />
             
             <Column
             key='percent_change_1h'
             title="HOUR"
-            render={item => {  return this.priceColor(item.percent_change_1h); }}
+            render={item => {  return this.priceColor(item.hour); }}
             />
             
             <Column
             key='percent_change_24h'
             title="DAILY"
-            render={item => { return this.priceColor(item.percent_change_24h); }}
+            render={item => { return this.priceColor(item.day); }}
             />
             
             <Column
             key='percent_change_7d'
             title="WEEKLY"
-            render={item => { return this.priceColor(item.percent_change_7d); }}
+            render={item => { return this.priceColor(item.week); }}
             />
             
             <Column
@@ -234,6 +233,7 @@ class CoinsRanked extends Component {
             render={item => { return this.CheckSymbol(item.symbol); }}
             />
             </Table>
+
             </Content>
             </Col>
         </Row>
@@ -242,4 +242,6 @@ class CoinsRanked extends Component {
     }
 }
 // bd6fec8442ff471fb5bfc3d813abfccf
+/*
+*/
 export default CoinsRanked;

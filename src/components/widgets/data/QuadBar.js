@@ -40,8 +40,8 @@ class QuadBar extends Component {
 	}
     
     VolumeConvertDollar(props) {
-		if ( props.details !== null || undefined ) {
-		const number = n(props.details.volume);
+		if ( props.coinCap !== null || undefined ) {
+		const number = n(props.coinCap.volume);
 		n.defaultFormat(`$0,0`);
 		const reFormat = number.format();
 		return (<span className="stat-number">{reFormat}</span>);
@@ -81,18 +81,69 @@ class QuadBar extends Component {
     }
 
     ConvertSupply(props) {
-        if ( props.total_supply !== null || undefined ) {
-            const number = n(props.total_supply);
+        
+        if ( props.total !== 0 ) {
+        
+            const number = n(props.total);
+        
             n.defaultFormat(`0,0`);
+        
             const reFormat = number.format();
-            return ( <span className="stat-number">{reFormat}</span> );
-        } else if ( props.max_supply !== null || undefined ) {
-            const number = n(props.max_supply);
-            n.defaultFormat(`0,0`);
-            const reFormat = number.format();
-            return ( <span className="stat-number">{reFormat}</span> );
-        } else {
-            return ( <span className="stat-number"><Tag color="volcano">UNKNOWN</Tag></span>);
+        
+            return (<Col span={this.state.span} 
+                className="profile-stat-box-section" 
+                style={{margin: this.state.margin}} >
+                <Col span={14} style={{padding: 5}}>
+                <span className="stat-title">TOTAL SUPPLY <Divider type="vertical"/></span>
+                </Col>
+
+                <Col span={6}>
+                <span className="stat-number">{reFormat}</span>
+                </Col>
+                </Col>);
+        
+            } else if ( props.max !== 0 ) {
+        
+                const number = n(props.max);
+        
+                n.defaultFormat(`0,0`);
+        
+                const reFormat = number.format();
+        
+                return ( <Col span={this.state.span} 
+        
+                    className="profile-stat-box-section" 
+        
+                    style={{margin: this.state.margin}} >
+        
+                    <Col span={14} style={{padding: 5}}>
+        
+                    <span className="stat-title">MAX SUPPLY <Divider type="vertical"/></span>
+        
+                    </Col>
+
+                <Col span={6}>
+        
+                <span className="stat-number">{reFormat}</span>
+        
+                </Col>
+        
+                </Col> );
+        
+            } else {
+            return ( 
+                <Col span={this.state.span} 
+                className="profile-stat-box-section" 
+                style={{margin: this.state.margin}} >
+                <Col span={14} style={{padding: 5}}>
+                <span className="stat-title">MAX SUPPLY <Divider type="vertical"/></span>
+                </Col>
+
+                <Col span={6}>
+                <span className="stat-number"><Tag color="volcano">UNKNOWN</Tag></span>
+                </Col>
+                </Col>
+                );
         }
     }
 
@@ -100,8 +151,10 @@ class QuadBar extends Component {
 
         
         return (
+        
         <Layout> 
-            <Row span={24} type="flex" justify="center">
+    
+        <Row span={24} type="flex" justify="center">
             <Col span={this.state.span} 
             className="profile-stat-box-section" 
             style={{margin: this.state.margin}}>
@@ -110,7 +163,7 @@ class QuadBar extends Component {
                 </Col>
 
                 <Col span={6}>
-                    {this.ConvertDollar(this.props.data.data.coin_bySymbol.profile.price_usd)}
+                    {this.ConvertDollar(this.props.data.data.allCoinProfiles[0].price)}
                 </Col>
 
               </Col>
@@ -123,7 +176,7 @@ class QuadBar extends Component {
               </Col>
 
               <Col span={6}>
-              {this.NumberColorHandler(this.props.data.data.coin_bySymbol.profile.percent_change_1h)}
+              {this.NumberColorHandler(this.props.data.data.allCoinProfiles[0].hour)}
               </Col>
                 </Col>
                 <Col span={this.state.span} 
@@ -134,7 +187,7 @@ class QuadBar extends Component {
                 </Col>
 
                 <Col span={6}>
-                {this.NumberColorHandler(this.props.data.data.coin_bySymbol.profile.percent_change_24h)}
+                {this.NumberColorHandler(this.props.data.data.allCoinProfiles[0].day)}
                 </Col>
                 </Col>
     
@@ -146,61 +199,12 @@ class QuadBar extends Component {
                 </Col>
 
                 <Col span={6}>
-                {this.NumberColorHandler(this.props.data.data.coin_bySymbol.profile.percent_change_7d)}
+                {this.NumberColorHandler(this.props.data.data.allCoinProfiles[0].week)}
                 </Col>
                 </Col>
                         
             </Row>
-            <Row span={24} type="flex" justify="center">
-            <Col span={this.state.span} 
-            className="profile-stat-box-section" 
-            style={{margin: this.state.margin}}>
-                <Col span={14} style={{padding: 5}}>
-                <span className="stat-title">VOLUME <Divider type="vertical"/></span>
-                </Col>
-
-                <Col span={6}>
-                {this.VolumeConvertDollar(this.props.data.data.coin_bySymbol)}
-                </Col>
-
-              </Col>
             
-              <Col span={this.state.span} 
-              className="profile-stat-box-section" 
-              style={{margin: this.state.margin}}>
-              <Col span={14} style={{padding: 5}}>
-              <span className="stat-title">MARKETCAP <Divider type="vertical"/></span>
-              </Col>
-
-              <Col span={6}>
-              {this.LargeConvertDollar(this.props.data.data.coin_bySymbol.profile.market_cap_usd)}
-              </Col>
-                </Col>
-                <Col span={this.state.span} 
-                className="profile-stat-box-section" 
-                style={{margin: this.state.margin}}>
-                <Col span={14} style={{padding: 5}}>
-                <span className="stat-title">CIRCULATING <Divider type="vertical"/></span>
-                </Col>
-
-                <Col span={6}>
-                {this.ConvertLargeNumber(this.props.data.data.coin_bySymbol.profile.available_supply)}
-                </Col>
-                </Col>
-    
-                <Col span={this.state.span} 
-                className="profile-stat-box-section" 
-                style={{margin: this.state.margin}} >
-                <Col span={14} style={{padding: 5}}>
-                <span className="stat-title">TOTAL SUPPLY <Divider type="vertical"/></span>
-                </Col>
-
-                <Col span={6}>
-                {this.ConvertSupply(this.props.data.data.coin_bySymbol.profile)}
-                </Col>
-                </Col>
-                        
-            </Row>
         </Layout>
         );
     }

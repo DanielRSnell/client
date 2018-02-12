@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import * as m from 'moment';
-import { Layout, Row, Col, Divider } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import Highcharts from 'highcharts/highstock';
-import ChartSide from '../data/ChartSide';
-import n from 'numeral';
-
-const { Content } = Layout;
 
 // Load Highmaps as a module
 require('highcharts/modules/map')(Highcharts);
 
 class CandleChart extends Component {
-
-	constructor(props) {
-		super(props);
-	}
 	
 	state = {
 		ohlc_data: null,
@@ -34,23 +25,20 @@ class CandleChart extends Component {
 	}
 	
 	componentDidMount() {
-		console.log(`Component has landed`);
 		this.PrepareData();
 		this.setState({ loading: true });
 	}
 	
 	PrepareData() {
 	
-		const Values = this.props.coins.data.coin_charts;
+		const Values = this.props.coins.data.history;
 		
-		const itemName = this.props.coins.data.coin_bySymbol.profile.name;
-		
-		this.loadChart( Values, itemName )
+		this.loadChart( Values )
 	}
 
 	//Props Passed 
 
-	loadChart(itemHist, itemName) {
+	loadChart( itemHist ) {
 
 		const ohlcData = [];
 		const volumeData = [];
@@ -127,7 +115,7 @@ class CandleChart extends Component {
 			series: [
 				{
 					type: 'candlestick',
-					name: itemName,
+					name: this.props.coins.data.allCoinProfiles[0].name,
 					data: ohlcData
 				},
 				{
@@ -147,21 +135,20 @@ class CandleChart extends Component {
 	render() {
 
 	// Pending is not required for Candle / Loading 
-	console.log(this.props);
+	
+	
 	// Post the data 		
 			
 		return (
 			
 
-		<Row span={24} type="flex" justify="center" style={{margin: 10}}>
+		<Row span={24} type="flex" justify="center" style={{margin: 0}}>
 
-				<Col className="profile-stat-box-section" span={22} style={{ padding: 10}}>
+				<Col className="profile-stat-box-section" span={24} style={{ padding: 0}}>
 
-				<Col style={{margin: 5, padding: 10}}>
 
 				<div id="loading" />
 				
-				</Col>
 	
 	</Col>
 			

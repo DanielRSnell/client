@@ -32,27 +32,92 @@ class Home extends Component {
       return (<span className="global-bar">{reFormat}</span>);
   }
 
+  CheckMarketCap(props) {
+
+
+    if ( props.global !== undefined ) {
+
+      return this.ConvertDollar(props.global.marketcap);
+
+      } else {
+       
+        return "Loading....";
+        
+      }
+
+  }
+
+  CheckDom(props) {
+
+
+    if ( props.global !== undefined ) {
+
+      return props.global.dom;
+
+      } else {
+       
+        return "Loading....";
+        
+      }
+
+  }
+
+
+  CheckVolume(props) {
+
+
+    if ( props.global !== undefined ) {
+
+      return this.ConvertDollar(props.global.volume);
+
+      } else {
+       
+        return "Loading....";
+        
+      }
+
+  }
 
     render() { 
 
       if ( this.props.coins.loading ) {
         return (
-          <div className="example">    
-              <Row span={24} type="flex" justify="center" className="home-headline-row">
-            <Col span={12} className="home-headline-column">
-            <center>
-              <h1>WELCOME TO HACKCOIN</h1>
-              <Divider />
-              <span className="home-header-subtitle">
-                WE PROVIDE AN <strong>AD FREE COMMUNITY</strong>, ALL DATA, <strong>NO BULLSHIT</strong>.
-              </span>
-              </center>
-              </Col>  
-            </Row> 
-              <Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!">
-  
-                </Spin>
-                </div>
+          <Content style={{margin: 10}}>
+          <Row span={24} type="flex" justify="center" className="home-headline-row">
+          <Col span={12} className="home-headline-column">
+          <center>
+            <h1>WELCOME TO HACKCOIN</h1>
+            <Divider />
+            <span className="home-header-subtitle">
+              THE <strong>WORLD'S LARGEST</strong> CRYPTO GRAPHQL NETWORK.
+            </span>
+            </center>
+            </Col>  
+          </Row> 
+            <Row span={22} type="flex" className="filter-home">
+            <Col span={5} push={2} style={{margin: 10}}>
+            <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
+                <strong>TOTAL MARKETCAP:</strong> Loading...
+              </Content>
+              </Col>
+              <Col span={5} push={2} style={{margin: 10}}>
+            <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
+              <strong>DAILY VOLUME:</strong> Loading...
+              </Content>
+              </Col>
+              <Col span={5} push={2} style={{margin: 10}}>
+            <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
+              <strong>BITCOIN DOMINANCE:</strong> Loading...
+              </Content>
+              </Col>
+              <Col span={5} push={2} type="flex" justify="center" style={{margin: 10}}>
+              <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
+                </Col>
+            </Row>
+            <Row>
+              <CoinsRanked data={this.props} loading={true} />
+            </Row>
+          </Content>
               );
       }
 
@@ -69,20 +134,28 @@ class Home extends Component {
           </center>
           </Col>  
         </Row> 
-          <Row span={20} type="flex" className="filter-home">
+          <Row span={22} type="flex" className="filter-home">
           <Col span={5} push={2} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-              <strong>TOTAL MARKETCAP:</strong> {this.ConvertDollar(this.props.coins.global.total_market_cap_usd)}
+              <strong>TOTAL MARKETCAP:</strong> {
+              
+                this.CheckMarketCap(this.props.coins)
+              
+              }
             </Content>
             </Col>
             <Col span={5} push={2} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-            <strong>DAILY VOLUME:</strong> {this.ConvertDollar(this.props.coins.global.total_24h_volume_usd)}
+            <strong>DAILY VOLUME:</strong> {
+            
+              this.CheckVolume(this.props.coins)
+            
+            }
             </Content>
             </Col>
             <Col span={5} push={2} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-            <strong>BITCOIN DOMINANCE:</strong> {this.props.coins.global.bitcoin_percentage_of_market_cap}%
+            <strong>BITCOIN DOMINANCE:</strong> {this.CheckDom(this.props.coins)}%
             </Content>
             </Col>
             <Col span={5} push={2} type="flex" justify="center" style={{margin: 10}}>
@@ -90,7 +163,7 @@ class Home extends Component {
               </Col>
           </Row>
           <Row>
-            <CoinsRanked data={this.props} />
+            <CoinsRanked data={this.props} loading={false} />
           </Row>
         </Content>
        );
@@ -99,31 +172,33 @@ class Home extends Component {
 
 
 const query = gql`
-{
-  coins_rank{
-    _rank
+query Home {
+  allCoinProfiles( 
+  orderBy: rank_ASC
+  ) {
     id
-    img
+    rank
+    cmc
     name
-    symbol
-    price_usd
-    percent_change_1h
-    percent_change_24h
-    percent_change_7d
-    market_cap_usd
-    volume
+		symbol
+    price
+    hour
+    day
+    week
+    marketcap
+    coinCap {
+      volume
+    }
+    coinImage {
+      image32
+    }
   }
-  global{
-    active_assets
-    active_markets
-    active_currencies
-    bitcoin_percentage_of_market_cap
-    last_updated
-    total_24h_volume_usd
-    total_market_cap_usd
+  global {
+    marketcap
+    volume
+    dom
   }
 }
 `;
-
 
 export default graphql(query, {name: 'coins' })(Home);
