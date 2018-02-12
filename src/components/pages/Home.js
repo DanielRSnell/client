@@ -85,19 +85,11 @@ class Home extends Component {
       
        return (
     <div>
-      {!glob && <h1>Loading....</h1>} 
+      {!glob && <Row>
+        <CoinsRanked data={this.props} loading={false} />
+      </Row>}
+      {glob && 
        <Content style={{margin: 10}}>
-        <Row span={24} type="flex" justify="center" className="home-headline-row">
-        <Col span={12} className="home-headline-column">
-        <center>
-          <h1>WELCOME TO HACKCOIN</h1>
-          <Divider />
-          <span className="home-header-subtitle">
-            THE <strong>WORLD'S LARGEST</strong> CRYPTO GRAPHQL NETWORK.
-          </span>
-          </center>
-          </Col>  
-        </Row> 
           <Row span={24} type="flex" className="filter-home">
           <Col span={5} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
@@ -130,6 +122,7 @@ class Home extends Component {
             <CoinsRanked data={this.props} loading={false} />
           </Row>
         </Content>
+          }
       </div> 
       );
     }
