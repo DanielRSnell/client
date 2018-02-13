@@ -52,7 +52,7 @@ class Home extends Component {
 
     if ( props.global !== undefined ) {
 
-      return props.global.dom;
+      return ( <span> {props.global.dom + '%'} </span>);
 
       } else {
        
@@ -85,9 +85,39 @@ class Home extends Component {
       
        return (
     <div>
-      {!glob && <Row>
+      {!glob && <Content style={{margin: 10}}>
+      <Row span={24} type="flex" className="filter-home">
+      <Col span={5} style={{margin: 10}}>
+      <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
+          <strong>TOTAL MARKETCAP:</strong> {
+          
+            this.CheckMarketCap(this.props.coins)
+          
+          }
+        </Content>
+        </Col>
+        <Col span={5}  style={{margin: 10}}>
+      <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
+        <strong>DAILY VOLUME:</strong> {
+        
+          this.CheckVolume(this.props.coins)
+        
+        }
+        </Content>
+        </Col>
+        <Col span={5} style={{margin: 10}}>
+      <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
+        <strong>BITCOIN DOMINANCE:</strong> {this.CheckDom(this.props.coins)}
+        </Content>
+        </Col>
+        <Col span={5} push={4} style={{margin: 10}}>
+        <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
+          </Col>
+      </Row>
+      <Row>
         <CoinsRanked data={this.props} loading={false} />
-      </Row>}
+      </Row>
+    </Content>}
       {glob && 
        <Content style={{margin: 10}}>
           <Row span={24} type="flex" className="filter-home">
@@ -111,7 +141,7 @@ class Home extends Component {
             </Col>
             <Col span={5} style={{margin: 10}}>
           <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
-            <strong>BITCOIN DOMINANCE:</strong> {this.CheckDom(this.props.coins)}%
+            <strong>BITCOIN DOMINANCE:</strong> {this.CheckDom(this.props.coins)}
             </Content>
             </Col>
             <Col span={5} push={4} style={{margin: 10}}>
@@ -144,12 +174,7 @@ query Home {
     day
     week
     marketcap
-    coinCap {
-      volume
-    }
-    coinImage {
-      image32
-    }
+    volume
   }
   global {
     marketcap

@@ -64,14 +64,17 @@ class IcoProfile extends Component {
     }
 
     CreateVideo(props) {
+    console.log(`Check Video`);
+    console.log(props);
+    if ( props !== null ) {
 
-    if ( props !== '' ) {    
+    if ( props.video !== null ) {    
 
         return ( 
             <Content className="ico-video-container">
             <Col className="ico-video-asset">
             <center>
-            <iframe width="560" height="315" src={props} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+            <iframe width="560" height="315" src={props.video} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
             </center>
             </Col>
             </Content>
@@ -98,6 +101,27 @@ class IcoProfile extends Component {
         
         );
     }
+} else {
+
+  return (  <Content className="ico-video-container">
+    
+    <Col className="ico-video-asset">
+    
+    <center>
+    
+    <h1 className="ico-video-message">WOMP, VOTE FOR A VIDEO!</h1>
+    <Button type="primary" ghost>Please Review</Button>
+    {' '}<Divider type="vertical" />{' '}
+    <Button type="danger" ghost>Shitcoin, NTY</Button>
+
+    </center>
+
+    </Col>
+
+</Content> );
+
+
+}
 
     }
 
@@ -131,20 +155,23 @@ class IcoProfile extends Component {
     }
 
    CreateTeamList(props) {
-      if ( props.team !== null ) { 
+      if ( props !== null ) { 
         return (
             <List
-            grid={{ gutter: 10, column: 2}}
-            dataSource={props.team}
+            itemLayout="horizontal"
+            dataSource={props}
             renderItem={item => (
                 <List.Item>
                 <List.Item.Meta
                 avatar={<Avatar src={item.photo} />}
-                title={<a href={item.links}>{item.name} <Divider type="vertical" /> {item.title}</a>}
-                description={`Score: ${item.iss}`}
+                title={<a href={item.links}><Icon type="linkedin" /> {item.name}</a>}
+                description={item.title}
                 />
+                <Col>
+                <strong>ISS: </strong>{item.iss}
+                </Col>
             </List.Item>
-            )}
+        )}
         />
         )
     } else {
@@ -201,13 +228,15 @@ class IcoProfile extends Component {
 
     CreateTwitter(props) {
 
-    const CheckHTTPS = props.links.twitter.includes("https");
+    if ( props !== null ) {
 
-    const CheckHTTP = props.links.twitter.includes("http");
+    const CheckHTTPS = props.twitter.includes("https");
+
+    const CheckHTTP = props.twitter.includes("http");
         
     if ( CheckHTTPS !== false ) {
        
-        const Format = props.links.twitter.split("https://twitter.com/").join("");
+        const Format = props.twitter.split("https://twitter.com/").join("");
        
         return (
             <Timeline 
@@ -224,7 +253,7 @@ class IcoProfile extends Component {
         )
     } else if ( CheckHTTP !== false ) {
        
-        const Format = props.links.twitter.split("http://twitter.com/").join("");
+        const Format = props.twitter.split("http://twitter.com/").join("");
         
         return (
             <Timeline 
@@ -243,20 +272,31 @@ class IcoProfile extends Component {
             return (
         <Col className="ico-video-asset">
         <center>
-        <h3 className="ico-video-message"><Icon type="twitter" fontSize={24}/> Not Available</h3>
+        <h3 className="ico-video-message">
+        <Icon type="twitter" fontSize={24}/> Not Available</h3>
         </center>
         </Col>
             )
         }
+    } else {
+
+        return (
+            <Col className="ico-video-asset">
+            <center>
+            <h3 className="ico-video-message">
+            <Icon type="twitter" fontSize={24}/> Not Available</h3>
+            </center>
+            </Col>);
     }
+}
 
     CreateExchangeList(props) {
 
-    if ( props.exchanges !== null || undefined ) {
+    if ( props.icoExchanges !== null || undefined ) {
         return (
             <List
             itemLayout="horizontal"
-            dataSource={props.exchanges}
+            dataSource={props.icoExchanges}
             renderItem={item => (
     
             <List.Item>
@@ -335,9 +375,9 @@ class IcoProfile extends Component {
 
     CreateTeamImages(props) {
 
-    if ( props.team !== null ) {
+    if ( props.icoTeams !== null ) {
 
-       return  props.team.map( (item) => {
+       return  props.icoTeams.map( (item) => {
             
             const MakeTeam = <Col span={4}>
         
@@ -368,9 +408,9 @@ class IcoProfile extends Component {
 
     CreateExchangeImages(props) {
 
-        if ( props.exchanges !== null ) {
+    if ( props.icoExchanges.length > 0 ) {
 
-       return props.exchanges.map( (item) => {   
+       return props.icoExchanges.map( (item) => {   
                      
             const MakeExchange = <Col span={4}>
         
@@ -396,35 +436,28 @@ class IcoProfile extends Component {
         }
     }
 
-    CreateMarkup() {
-        const rawMarkup = this.props.data.ico_byName.about;
-        const format = rawMarkup.split("<strong>").join("<p></br><strong>");
-        const reformat = format.split("</strong>").join("</strong></p>");
-        console.log(reformat);
-        return {__html: reformat };
+    CreateMarkup(props) {
+      
+        const raw = props.about.split("<br />").join("<br /></br />")
+        
+        return { __html: raw }; 
+
     }
 
     render() {
+    console.log(this.props.data);
 
-        if ( this.props.data.loading ) {
-            
-            return (
-            
-            <div className="example">    
-                  <Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!">
-      
-                    </Spin>
-                    </div>
-                  );
-        
-        } else {
-            console.log(this.props);
-        }
+      const data = this.props.data.IcoProfile;
+    
+      return ( 
+    <div>
+    {!data &&  <div className="example">    
+    <Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!">
 
-        return ( 
-        
-    <Layout className="profile-container" style={{margin: 20}}>
-
+      </Spin>
+      </div> }
+   {data && <Layout className="profile-container" style={{margin: 20}}>
+        {console.log(data)}
         <Row span={24}>
     
             <Col span={12} push={1}>
@@ -432,7 +465,7 @@ class IcoProfile extends Component {
             <Row className="profile-header" >
                 <Col span={4} className="ico-image">
                 
-                <img  className="ico-profile-logo" src={this.props.data.ico_byName.logo} />
+                <img  className="ico-profile-logo" src={data.logo} />
                 
                 </Col>
                 
@@ -441,14 +474,14 @@ class IcoProfile extends Component {
                 
                 <Row className="ico-name">
                 
-                <span className="header-profile">{this.props.data.ico_byName.name}</span>
+                <span className="header-profile">{data.name}</span>
 
                 </Row>
 
 
                 <Row className="ico-tagline">
 
-                <span className="header-tagline">{this.props.data.ico_byName.tagline}</span>
+                <span className="header-tagline">{data.tagline}</span>
 
                 </Row>
 
@@ -459,13 +492,13 @@ class IcoProfile extends Component {
 
                 <Row span={12} className="ico-information">
 
-                { this.props.data.ico_byName.intro }
+                { data.intro }
 
                 </Row>
 
                 <Row>
             
-                {this.props.data.ico_byName.categories.map((item) => {
+                {data.icoCategories.map((item) => {
                     const CreateTag = <Tag key={item.id} className="ico-tags">{item.name}</Tag>;
                     return CreateTag;
                   })}
@@ -474,7 +507,7 @@ class IcoProfile extends Component {
 
                 <Row>
 
-                {this.CreateVideo(this.props.data.ico_byName.links.youtube)}
+                {this.CreateVideo(data.icoLinks)}
 
                 </Row>
 
@@ -488,9 +521,9 @@ class IcoProfile extends Component {
             
                 <Row> 
             
-                <span className="ico-rating-main">{this.CreateRating(this.props.data.ico_byName.rating)}</span>
+                <span className="ico-rating-main">{this.CreateRating(data.rating)}</span>
             
-                {this.CountExperts(this.props.data.ico_byName.ratings)}
+                {this.CountExperts(data.icoRatings)}
             
                 <Divider />
             
@@ -502,7 +535,7 @@ class IcoProfile extends Component {
             
                 <span className="ico-rating-item">
             
-                  {this.props.data.ico_byName.ratingProduct}
+                  {data.ratingProduct}
             
                     </span>
             
@@ -518,7 +551,7 @@ class IcoProfile extends Component {
 
                 <span className="ico-rating-item">
               
-                {this.props.data.ico_byName.ratingProfile}
+                {data.ratingProfile}
               
                 </span>
               
@@ -534,7 +567,7 @@ class IcoProfile extends Component {
 
                 <span className="ico-rating-item">
               
-                {this.props.data.ico_byName.ratingTeam}
+                {data.ratingTeam}
               
                 </span>
 
@@ -550,7 +583,7 @@ class IcoProfile extends Component {
 
                 <span className="ico-rating-item">
               
-                {this.props.data.ico_byName.ratingVision}
+                {data.ratingVision}
               
                 </span>
 
@@ -570,7 +603,7 @@ class IcoProfile extends Component {
         
                         <Col span={12}>
     
-                            <span className="ico-date">{this.CreateDates(this.props.data.ico_byName.dates.preIcoStart)}</span>
+                            <span className="ico-date">{this.CreateDates(data.prestart)}</span>
         
                             <span className="ico-rating-experts">PRE-ICO START</span>
         
@@ -578,7 +611,7 @@ class IcoProfile extends Component {
                     
                         <Col span={12}>
         
-                        <span className="ico-date">{this.CreateDates(this.props.data.ico_byName.dates.preIcoEnd)}</span>
+                        <span className="ico-date">{this.CreateDates(data.preend)}</span>
         
                         <span className="ico-rating-experts">PRE-ICO END</span>
             
@@ -592,7 +625,7 @@ class IcoProfile extends Component {
             
                         <Col span={12}>
         
-                            <span className="ico-date">{this.CreateDates(this.props.data.ico_byName.dates.icoStart)}</span>
+                            <span className="ico-date">{this.CreateDates(data.start)}</span>
         
                             <span className="ico-rating-experts">START DATE</span>
             
@@ -600,7 +633,7 @@ class IcoProfile extends Component {
                     
                         <Col span={12}>
             
-                        <span className="ico-date">{this.CreateDates(this.props.data.ico_byName.dates.icoEnd)}</span>
+                        <span className="ico-date">{this.CreateDates(data.end)}</span>
             
                         <span className="ico-rating-experts">END DATE</span>
                 
@@ -612,7 +645,7 @@ class IcoProfile extends Component {
 
                     <Row type="flex" justify="center">
                 
-                { this.CreateExchangeImages(this.props.data.ico_byName) }
+                { this.CreateExchangeImages(data) }
                 
                 </Row>
                 
@@ -620,7 +653,7 @@ class IcoProfile extends Component {
                 
                 <Row type="flex" justify="center">
                   
-                {this.CreateTeamImages(this.props.data.ico_byName)}
+                {this.CreateTeamImages(data)}
                 </Row>
             </Col>
 
@@ -639,16 +672,16 @@ class IcoProfile extends Component {
                     <Tabs defaultActiveKey="about" onChange={callback}>
                     
                     <TabPane tab="About" key="about">
-                    <h1><strong>About {this.props.data.ico_byName.name}</strong></h1>
-                   
-                        <div className="ico-about-page" dangerouslySetInnerHTML={this.CreateMarkup()} />
-                   
+                    <h1><strong>About {data.name}</strong></h1>
+                        <Divider />
+                        <div className="ico-about-page" dangerouslySetInnerHTML={this.CreateMarkup(data)} />
+                        
                      </TabPane>
                     
                     <TabPane tab="Milestones" key="milestones">
                     
                   
-                   {this.CreateMilestoneList(this.props.data.ico_byName)}
+                   {this.CreateMilestoneList(data)}
                   
                     
                     
@@ -656,49 +689,31 @@ class IcoProfile extends Component {
                     
                     <TabPane tab="Team" key="team">
                                         
-                    {this.CreateTeamList(this.props.data.ico_byName)}
+                    {this.CreateTeamList(data.icoTeams)}
                     
                     </TabPane>
                     
                     <TabPane tab="Ratings" key="ratings">
-                    {this.CreateRatingsList(this.props.data.ico_byName.ratings)}
+                    {this.CreateRatingsList(data.icoRatings)}
                     </TabPane> 
 
                     <TabPane tab="Financials" key="finance">
-                    
+                    {!data.icoFinance}
+                    {data.icoFinance &&
                     <Row>
 
                     <Col className="finanical-box">
-        
+
                     <Row span={24}>
-        
                         <Col span={12}>
         
-                        <strong>Symbol: </strong>{' '}{this.props.data.ico_byName.finance.token}
+                        <strong>Symbol: </strong>{' '}{data.icoFinance.token}
         
                         </Col>
         
                         <Col span={12}>
         
-                        <strong>Platform:</strong>{' '}{this.props.data.ico_byName.finance.platform}
-        
-                        </Col>
-        
-                        </Row>
-        
-                        <Divider />
-        
-                        <Row span={24}>
-        
-                        <Col span={12}>
-        
-                        <strong>Type: </strong>{' '}{this.props.data.ico_byName.finance.tokentype}
-        
-                        </Col>
-        
-                        <Col span={12}>
-        
-                        <strong>Accepting:</strong>{' '}{this.props.data.ico_byName.finance.accepting}
+                        <strong>Platform:</strong>{' '}{data.icoFinance.platform}
         
                         </Col>
         
@@ -710,13 +725,31 @@ class IcoProfile extends Component {
         
                         <Col span={12}>
         
-                        <strong>Total Tokens: </strong>{' '}{this.props.data.ico_byName.finance.tokens}
+                        <strong>Type: </strong>{' '}{data.icoFinance.tokentype}
         
                         </Col>
         
                         <Col span={12}>
         
-                        <strong>Distributed:</strong>{' '}{this.props.data.ico_byName.finance.distributed}
+                        <strong>Accepting:</strong>{' '}{data.icoFinance.accepting}
+        
+                        </Col>
+        
+                        </Row>
+        
+                        <Divider />
+        
+                        <Row span={24}>
+        
+                        <Col span={12}>
+        
+                        <strong>Total Tokens: </strong>{' '}{data.icoFinance.tokens}
+        
+                        </Col>
+        
+                        <Col span={12}>
+        
+                        <strong>Distributed:</strong>{' '}{data.icoFinance.distributed}
         
                         </Col>
         
@@ -729,42 +762,44 @@ class IcoProfile extends Component {
         
                         <Col span={12}>
         
-                        <strong>Softcap: </strong>{' '}{this.props.data.ico_byName.finance.softcap}
+                        <strong>Softcap: </strong>{' '}{data.icoFinance.softcap}
         
                         </Col>
         
                         <Col span={12}>
         
-                        <strong>Hardcap:</strong>{' '}{this.props.data.ico_byName.finance.hardcap}
+                        <strong>Hardcap:</strong>{' '}{data.icoFinance.hardcap}
         
                         </Col>
         
                         </Row>
         
                         <Divider />
-            
-                    </Col>
-                
-                </Row>
-
-                    <Row>
-                    <h3><strong>Associated Exchanges with {this.props.data.ico_byName.name}</strong></h3>
-                    {this.CreateExchangeList(this.props.data.ico_byName)}
-                    </Row>
                     
+                    </Col>
+                    
+                </Row>
+                    }
+                    <Row>
+                    <h3><strong>Associated Exchanges with {data.name}</strong></h3>
+                    {this.CreateExchangeList(data)}
+                    </Row>
+      
                     </TabPane>
 
                     <TabPane tab="Links" key="links">
-                    
+                    {!data.icoLinks}
+                    {data.icoLinks && 
                     <Row className="social-info" span={24}>
-
+                    {!data.icoLinks.twitter && !data.icoLinks.facebook}
+                    { data.icoLinks.twitter && data.icoLinks.facebook &&
                     <Row>
                 
                         <Col span={12}>
 
                         <strong><Icon type="twitter" style={{ fontSize: 20 }}/> 
                         <a href=
-                        {this.props.data.ico_byName.links.twitter}>
+                        {data.icoLinks.twitter}>
                         {' '}Twitter
                         </a>
                         </strong>    
@@ -775,7 +810,7 @@ class IcoProfile extends Component {
 
                         <strong><Icon type="facebook" style={{ fontSize: 20 }}/>
                         <a href=
-                        {this.props.data.ico_byName.links.facebook}>
+                        {data.icoLinks.facebook}>
                         {' '}Facebook
                          </a>
                          </strong>    
@@ -784,14 +819,14 @@ class IcoProfile extends Component {
                    
                         
                     </Row>
-
+                    }
                     <Row>
                 
                     <Col span={12}>
 
                     <strong><Icon type="github" style={{ fontSize: 20 }}/> 
                     <a href=
-                    {this.props.data.ico_byName.links.github}>
+                    {data.icoLinks.github}>
                     {' '}Github
                     </a>
                     </strong>    
@@ -802,7 +837,7 @@ class IcoProfile extends Component {
 
                     <strong><Icon type="medium" style={{ fontSize: 20 }}/> 
                     <a href=
-                    {this.props.data.ico_byName.links.medium}>
+                    {data.icoLinks.medium}>
                     {' '}Medium
                     </a>
                     </strong>    
@@ -818,7 +853,7 @@ class IcoProfile extends Component {
 
                 <strong><Icon type="global" style={{ fontSize: 20 }}/> 
                 <a href=
-                {this.props.data.ico_byName.links.www}>
+                {data.icoLinks.www}>
                 {' '}Website
                 </a>
                 </strong>    
@@ -828,7 +863,7 @@ class IcoProfile extends Component {
                 <Col span={12}>
 
                 <strong><Icon type="file-text" style={{ fontSize: 20 }}/>
-                <a href={this.props.data.ico_byName.links.whitepaper}>
+                <a href={data.icoLinks.whitepaper}>
                 {' '}Whitepaper
                  </a>
                  </strong>   
@@ -844,7 +879,7 @@ class IcoProfile extends Component {
 
                 <strong><Icon type="telegram" style={{ fontSize: 20 }}/>
                 <a href=
-                {this.props.data.ico_byName.links.telegram}>
+                {data.icoLinks.telegram}>
                 {' '}Telegram
                 </a>
                 </strong>
@@ -855,7 +890,7 @@ class IcoProfile extends Component {
 
                 <strong><Icon type="bitcoin" style={{ fontSize: 20 }}/>
                 <a href=
-                {this.props.data.ico_byName.links.bitcointalk}>
+                {data.icoLinks.bitcointalk}>
                 {' '}Bitcointalk
                 </a>
                 </strong>
@@ -868,7 +903,7 @@ class IcoProfile extends Component {
 
                 <strong><Icon type="reddit" style={{ fontSize: 20 }}/> 
                 <a href=
-                {this.props.data.ico_byName.links.reddit}>
+                {data.icoLinks.reddit}>
                 {' '}Reddit
                 </a></strong>   
                 <Divider /> 
@@ -878,7 +913,7 @@ class IcoProfile extends Component {
 
                 <strong><Icon type="slack" style={{ fontSize: 20 }}/>
                 <a href=
-                {this.props.data.ico_byName.links.slack}> 
+                {data.icoLinks.slack}> 
                 {' '}Slack 
                 </a>
                 </strong>    
@@ -891,7 +926,7 @@ class IcoProfile extends Component {
             </Row>
                    
              </Row>
-
+                    }
                     </TabPane>
 
                     </Tabs>
@@ -900,7 +935,7 @@ class IcoProfile extends Component {
 
                     <Col span={7} push={4} className="twitter-widget-holder" style={{margin:10, minHeight: 700, minWidth: 350}}>
                     <div className="twitter-header">
-                    {this.CreateTwitter(this.props.data.ico_byName)}
+                    {this.CreateTwitter(data.icoLinks)}
                     </div>
                     </Col>
 
@@ -909,7 +944,8 @@ class IcoProfile extends Component {
             </Row>
 
         </Layout>
-        
+    }
+    </div>
         );
     }
 }

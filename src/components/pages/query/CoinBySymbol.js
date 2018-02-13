@@ -14,6 +14,7 @@ query GetCoin($symbol: String!) {
     marketcap
     max
     total
+    volume
     circulating
     hour
     day
@@ -27,28 +28,14 @@ query GetCoin($symbol: String!) {
       exchange
       price
     }
-    coinCap {
-      volume
-    }
   compareList {
     algo
   	prooftype
   }
-    comparePage {
+  comparePage {
       desc
       website
       twitter
-    }
-    compareReddit {
-      active
-      dailyComments
-      dailyPosts
-      link
-      subscribers
-    }
-    compareTwitter {
-      followers
-      link
     }
   }
   history(

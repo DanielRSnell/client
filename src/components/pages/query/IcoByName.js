@@ -1,93 +1,76 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query IcoBySymbol($symbol: String!) {
-    ico_byName(name: $symbol) {
+query icoprofiles($symbol: ID!) {
+  IcoProfile(id: $symbol ) {
+    id
+		name
+    logo
+    desc
+    about
+    tagline
+    intro
+    rating
+    ratingTeam
+    ratingVision
+    ratingProduct
+    ratingProfile
+    start
+    end
+    prestart
+    preend
+    icoCategories {
       id
       name
-      desc
-      logo
-      image
-      tagline
-      premium
-      raised
-      all_time_roi
-      about
-      rating
-      country
-      url
-      intro
-      ratingProduct
-      ratingProfile
-      ratingTeam
-      ratingVision
-      coin_symbol
-      dates {
-        icoEnd
-        icoStart
-        preIcoEnd
-        preIcoStart
-      }
-      categories {
-        id
-        name
-      }
-      exchanges {
-        id
-        logo
-        name
-        price
-        roi
-      }
-      finance {
-        token
-        accepting
-        hardcap
-        softcap
-        tokens
-        tokentype
-        platform
-        distributed
-        bonus
-      }
-      links {
-        bitcointalk
-        discord
-        facebook
-        github
-        medium
-        reddit
-        slack
-        telegram
-        twitter
-        whitepaper
-        www
-        youtube
-      }
-      team {
-        group
-        iss
-        links
-        name
-        photo
-        title
-      }
-      ratings {
-        agree
-        date
-        name
-        photo
-        product
-        profile
-        review
-        team
-        title
-        vision
-        weight
-      }
-      milestones{
-        title
-        content
-      }
     }
-  }`;
+    icoExchanges {
+      id
+      name
+      logo
+    }
+  	icoTeams {
+      id
+      name
+      title
+      photo
+      iss
+    }
+    icoRatings {
+      photo
+      name
+      date
+      review
+      product
+      team
+      profile
+      vision
+    }
+    icoFinance {
+      token
+      platform
+      tokentype
+      accepting
+      tokens
+      distributed
+      softcap
+      hardcap
+    }
+    milestones {
+      id
+      title
+      content
+    }
+    icoLinks {
+      www
+      slack
+      bitcointalk
+      telegram
+      whitepaper
+      github
+      medium
+      facebook
+      twitter
+      video
+    }
+  }
+}`;

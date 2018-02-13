@@ -16,7 +16,7 @@ class SearchIco extends Component {
   }
   
   prepSearch() {
-    const Values = Object.values(this.props.data.icos.ico_main.ico_ranked);
+    const Values = Object.values(this.props.data.icos.ico_main);
 
     console.log(Values);
 

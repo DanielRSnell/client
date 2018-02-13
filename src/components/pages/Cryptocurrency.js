@@ -160,7 +160,7 @@ CreateTwitter(props) {
                 indentSize={20}
                 dataSource={data} 
                 columns={Columns} 
-                rowKey={item => item.exid}
+                rowKey={ (item) => item.exid}
                 />
                 
                 </Col>
@@ -171,7 +171,27 @@ CreateTwitter(props) {
 
     }
 
+    CreateFinanceData(props) {
+        console.log(props);
+
+        return ( <span>Something</span> );
+    }
     
+    CheckNullString(props) {
+        if (props === "") {
+          return "Unknown";
+        } else if (props === " ") {
+          return "Unknown";
+        } else if (props === undefined) {
+          return "Unknown";
+        } else if (props === "undefined") {
+          return "Unknown";
+        } else if (props === null) {
+          return "Unknown";
+        } else {
+          return props;
+        }
+      };
 
     CheckSymbol(props, currency) {
         if (props === "") {
@@ -227,12 +247,6 @@ CreateTwitter(props) {
             <TabPane tab="USD" key="1">
             <CandleChart coins={this.props} />
             </TabPane>
-            <TabPane tab="BTC" key="2">
-            Vs BTC
-            </TabPane>
-            <TabPane tab="ETH" key="3">
-            Vs ETH
-            </TabPane>
             <TabPane tab="TRADING VIEW" key="4">
             <TradingViewWidget
             width="100%"
@@ -267,15 +281,9 @@ CreateTwitter(props) {
                     
                     </TabPane>
                     
-                    <TabPane tab="SOCIAL" key="3">
-                    
-                    Social Data
-                    
-                    </TabPane>
-                    
                     <TabPane tab="FINANCIAL" key="4">
                     
-                    Financial Data
+                    {this.CreateFinanceData(this.props.data.allCoinProfiles[0])}
                     
                     </TabPane>
                     

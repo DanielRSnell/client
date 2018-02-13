@@ -27,7 +27,7 @@ import IcoProfile from './pages/IcoProfile';
 
 // ICO Tables
 
-import IcoList from './pages/ico/IcoList';
+import IcoList from './pages/IcoList';
 
 // Testing Grounds - Where we build things 
 import Test from '../test/test';

@@ -104,7 +104,7 @@ class CoinsRanked extends Component {
 
    LargeConvertVolume(props) {
     if ( props !== null ) {
-    const convertNumber = parseInt(props.volume);
+    const convertNumber = parseInt(props);
     const number = n(convertNumber);
     n.defaultFormat(`$0,0`);
     const reFormat = number.format();
@@ -166,9 +166,9 @@ LargeConvertMarket(props) {
             <Table
             loading={this.props.loading}
             size="default"
-            bordered={true}
+            bordered={false}
             indentSize={20}
-            pagination={{ pageSize: 300}}
+            pagination={{ pageSize: 100}}
             dataSource={data}
             onRowClick={ (item) => this.rowClickHandler(item.symbol)}
             rowKey={item => item.id}
@@ -183,7 +183,7 @@ LargeConvertMarket(props) {
             
             <Column
             key='id'
-            render={item => (<img src={item.coinImage.image32} /> )}
+            render={item => (<img src={"https://files.coinmarketcap.com/static/img/coins/32x32/" + item.cmc + '.png'} /> )}
             />
             
             <Column
@@ -194,7 +194,7 @@ LargeConvertMarket(props) {
             <Column
             key='volume'
             title="VOLUME"
-            render={item => { return this.LargeConvertVolume(item.coinCap) }}
+            render={item => { return this.LargeConvertVolume(item.volume) }}
             />
             
             <Column
@@ -241,7 +241,5 @@ LargeConvertMarket(props) {
          
     }
 }
-// bd6fec8442ff471fb5bfc3d813abfccf
-/*
-*/
+
 export default CoinsRanked;

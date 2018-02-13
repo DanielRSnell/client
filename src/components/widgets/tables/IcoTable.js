@@ -51,117 +51,9 @@ class IcoTable extends Component {
       }
 
     componentWillMount() {
-        this.setState({ loading: this.props.icos.ico_main.loading });
-        this.PrepareData();
+        console.log(this.props);
     }
 
-    componentWillUnmount() {
-        this.setState({ loading: this.props.icos.ico_main.loading });
-    }
-
-
-    PrepareData() {
-
-        const Values = Object.values(this.props.icos.ico_main.ico_ranked);
-
-        Values.forEach( item => { 
-            
-            if ( item.id !== null ) {
-
-           data.push(item);
-
-            }
-
-        });
-        this.setState({ store: data });
-    }
-
-    handleChange(props, options) {
-     
-        this.setState({loading: true});
-
-        if ( props === 'finished' ) {
-        
-            this.PrepareFinished();
-        
-        } else if ( props === 'live' ) {
-        
-            this.PrepareLive();
-        
-        } else if ( props === 'upcoming' ) {
-        
-            this.PrepareUpcoming();
-        
-        } else {
-        
-            this.PrepareData();
-        
-        } 
-
-    }
-
-PrepareFinished() { 
-        
-            
-            const Values = Object.values(this.props.icos.ico_main.ico_finished);
-    
-            const Finished = [];
-    
-            Values.forEach( item => { 
-                
-                if ( item.id !== null ) {
-    
-               Finished.push(item);
-    
-                }
-    
-        });
-
-        this.setState({ store: Finished });
-        this.setState({ loading: false });
-    }
-
-    PrepareUpcoming() { 
-        
-        const Values = Object.values(this.props.icos.ico_main.ico_upcoming);
-
-        const Upcoming = [];
-
-        Values.forEach( item => { 
-            
-            if ( item.id !== null ) {
-
-           Upcoming.push(item);
-
-            }
-
-    });
-
-    this.setState({ store: Upcoming });
-    this.setState({ loading: false });
-}
-
-    PrepareLive() { 
-        
-        const Values = Object.values(this.props.icos.ico_main.ico_live);
-
-        const Live = [];
-
-        Values.forEach( item => { 
-            
-            if ( item.id !== null ) {
-
-           Live.push(item);
-
-            }
-
-    });
-
-    this.setState({ store: Live });
-
-    this.setState({ loading: false });
-
-}
 
     tableChange = (pagination, filters, sorter) =>{
     console.log('Various paramaters', pagination, filters, sorter);
@@ -202,37 +94,15 @@ PrepareFinished() {
         sortedInfo = sortedInfo || {};
 
         filteredInfo = filteredInfo || {};
-     
+
+        const data = this.props.icos.ico_main.allIcoProfiles;
+        
+        console.log(this.props);
 
         return ( 
-
+<div>
+{!data && <h1>Loading...</h1>}
 <Layout>
-
- <Row span={24} type="flex" justify="center" className="options-bar">
-         
- <Col span={12} push={1}style={{padding: 5}}>
-            
-        <Select defaultValue="All ICOs" style={{width: 300}} style={{ width: 120 }} onSelect={(value, option) => this.handleChange(value, option)}>
-            
-            <Option value="all"> All ICOs</Option>
-
-            <Option value="finished">Finished</Option>
-            
-            <Option value="live">Live</Option>
-            
-            <Option value="upcoming">Upcoming</Option>
-        
-        </Select>
-                    
-    </Col>
-
-    <Col span={12} push={7} style={{padding: 5}}>
-    
-    <SearchIco className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
-    
-    </Col>
-
-     </Row>
 
      <Row type="flex" justify="center" span={24}>
 
@@ -246,8 +116,8 @@ PrepareFinished() {
             bordered={false}
             indentSize={20}
             pagination={{ pageSize: 100}}
-            dataSource={this.state.store}
-            onRowClick={ (item) => this.rowClickHandler(item.name)}
+            dataSource={this.props.icos.ico_main.allIcoProfiles}
+            onRowClick={ (item) => this.rowClickHandler(item.id)}
             rowKey={item => item.id}
             onChange={this.tableChange}
             >
@@ -288,11 +158,11 @@ PrepareFinished() {
             title={<strong>PLATFORM</strong>}
             key='platform'
             render={ item => { 
-                if ( item.finance !== null ) {
+                if ( item.icoFinance !== null ) {
                 
-                if ( item.finance.platform !== '' ) {
+                if ( item.icoFinance.platform !== '' ) {
                 
-                    return <span className="table-text">{item.finance.platform}</span>;
+                    return <span className="table-text">{item.icoFinance.platform}</span>;
 
                 } else { 
                     
@@ -313,11 +183,11 @@ PrepareFinished() {
             key='status'
             render={ item => {
                 
-                const CheckTime = m(item.dates.icoEnd).fromNow();
+                const CheckTime = m(item.end).fromNow();
                 
-                const InvalidTime = m(item.dates.preIcoEnd).fromNow();
+                const InvalidTime = m(item.preend).fromNow();
                 
-                const CheckStart = m(item.dates.preIcoStart).fromNow();
+                const CheckStart = m(item.prestart).fromNow();
                 
                 const CheckUnknown = CheckStart.includes('ago');
 
@@ -353,11 +223,11 @@ PrepareFinished() {
             title={<strong>START</strong>}
             key='icoStart'
             render={ item => {
-                const CheckTime = m(item.dates.icoStart).fromNow();
-                const InvalidTime = m(item.dates.preIcoStart).fromNow();
+                const CheckTime = m(item.start).fromNow();
+                const InvalidTime = m(item.prestart).fromNow();
 
-                const CheckTimeFormat = m(item.dates.icoStart).format('l');
-                const InvalidTimeFormat = m(item.dates.preIcoStart).format('l');
+                const CheckTimeFormat = m(item.start).format('l');
+                const InvalidTimeFormat = m(item.prestart).format('l');
 
                 if ( CheckTime !== 'Invalid date' ) {
                     return <span className="table-date">{CheckTimeFormat}</span>
@@ -372,13 +242,13 @@ PrepareFinished() {
             title={<strong>END</strong>}
             key='icoEnd'
             render={ item => {
-                const CheckTime = m(item.dates.icoEnd).fromNow();
+                const CheckTime = m(item.end).fromNow();
 
-                const InvalidTime = m(item.dates.preIcoEnd).fromNow();
+                const InvalidTime = m(item.preend).fromNow();
 
-                const CheckTimeFormat = m(item.dates.icoEnd).format('l');
+                const CheckTimeFormat = m(item.end).format('l');
 
-                const InvalidTimeFormat = m(item.dates.preIcoEnd).format('l');
+                const InvalidTimeFormat = m(item.preend).format('l');
 
                 if ( CheckTime !== 'Invalid date' ) {
                     return <span className="table-date">{CheckTimeFormat}</span>
@@ -395,6 +265,8 @@ PrepareFinished() {
             </Col>
          </Row>
          </Layout>
+        }
+        </div>
         );
     }
 }
