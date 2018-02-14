@@ -690,6 +690,7 @@ class IcoProfile extends Component {
                         <Divider />
                         <div className="ico-about-page" dangerouslySetInnerHTML={this.CreateMarkup(data)} />
                         
+                         <Divider />
                      </TabPane>
                     
                     <TabPane tab="Milestones" key="milestones">
@@ -936,8 +937,8 @@ class IcoProfile extends Component {
            
                 
             </Row>
-                
-            </Row>
+            
+                </Row>
                    
              </Row>
                     }
