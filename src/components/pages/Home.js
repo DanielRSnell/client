@@ -145,7 +145,7 @@ class Home extends Component {
             </Content>
             </Col>
             <Col span={5} push={4} style={{margin: 10}}>
-            <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
+            <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 200 }} />
               </Col>
           </Row>
           <Row>

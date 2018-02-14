@@ -64,8 +64,7 @@ class IcoProfile extends Component {
     }
 
     CreateVideo(props) {
-    console.log(`Check Video`);
-    console.log(props);
+   
     if ( props !== null ) {
 
     if ( props.video !== null ) {    
@@ -374,6 +373,8 @@ class IcoProfile extends Component {
     }
 
     CreateTeamImages(props) {
+    
+    if ( props !== null ) {
 
     if ( props.icoTeams !== null ) {
 
@@ -404,7 +405,20 @@ class IcoProfile extends Component {
             </Col> );
 
         }
+
+    } else {
+
+        return ( <Col className="ico-video-asset">
+        <center>
+        <h3 className="ico-video-message">Team Coming Soon</h3>
+        <Button type="primary" ghost>Please Notify</Button>
+        {' '}<Divider type="vertical" />{' '}
+        <Button type="danger" ghost>Not Interested</Button>
+        </center>
+        </Col> );    
+
     }
+}
 
     CreateExchangeImages(props) {
 
@@ -438,7 +452,7 @@ class IcoProfile extends Component {
 
     CreateMarkup(props) {
       
-        const raw = props.about.split("<br />").join("<br /></br />")
+        const raw = props.about.split("<br />").join("<br /> &nbsp")
         
         return { __html: raw }; 
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { Layout, Row, Col, Spin, Divider, Tabs, Icon, Table } from 'antd';
+import { Layout, Row, Col, Tag, Spin, Divider, Tabs, Icon, Table } from 'antd';
 import CoinBySymbol from './query/CoinBySymbol';
 import CandleChart from '../widgets/charts/CandleStick';
 import TopBar from '../widgets/data/TopBar';
 import QuadBar from '../widgets/data/QuadBar'; 
 import { Timeline } from 'react-twitter-widgets';
 import TradingViewWidget from 'react-tradingview-widget';
+import * as n from 'numeral';
 
     const TabPane = Tabs.TabPane;
 
@@ -174,7 +175,127 @@ CreateTwitter(props) {
     CreateFinanceData(props) {
         console.log(props);
 
-        return ( <span>Something</span> );
+        if ( props.coinstats !== null || undefined ) {
+        
+        return ( <Row>
+
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Name :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {this.CheckNullString(props.allCoinProfiles[0].name)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Algorithm :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {!props.allCoinProfiles[0].compareList.algo}
+            {this.CheckNullString(props.allCoinProfiles[0].compareList.algo)}
+                </Col>
+            </Row>
+
+            <Divider />
+
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Proof Type :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {!props.allCoinProfiles[0].compareList.prooftype}
+            {this.CheckNullString(props.allCoinProfiles[0].compareList.prooftype)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Marketcap :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {this.LargeConvertDollar(props.coinstats.market_cap)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Volume :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {this.LargeConvertDollar(props.coinstats.volume)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Max Supply :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {this.LargeNumber(props.allCoinProfiles[0].max)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+                <Col span={4}>
+            <strong>Total Supply:</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {this.LargeNumber(props.allCoinProfiles[0].total)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+                <Col span={6}>
+            <strong>Circulating Supply :</strong>{' '}
+                </Col>
+                <Col span={4}>
+            {this.LargeNumber(props.allCoinProfiles[0].circulating)}
+                </Col>
+            </Row>
+
+            <Divider />
+            <Row span={24}>
+            <Col span={5}>
+        <strong>VWAP 24 Hours:</strong>{' '}
+            </Col>
+            <Col span={4}>
+        {this.LargeConvertDollar(props.coinstats.vwap_h24)}
+            </Col>
+        </Row>
+        </Row>);
+
+        }
+    
+    }
+
+    LargeConvertDollar(props) {
+		if ( props !== null || undefined ) {
+		const number = n(props);
+		n.defaultFormat(`$0,0.00`);
+		const reFormat = number.format();
+		return (<span className="stat-number">{reFormat}</span>);
+        }  else {
+            return ( <span className="stat-number"><Tag color="volcano">UNKNOWN</Tag></span>);
+        }
+    }
+
+    LargeNumber(props) {
+		if ( props !== null || undefined ) {
+		const number = n(props);
+		n.defaultFormat(`0,0`);
+		const reFormat = number.format();
+		return (<span className="stat-number">{reFormat}</span>);
+        }  else {
+            return ( <span className="stat-number"><Tag color="volcano">UNKNOWN</Tag></span>);
+        }
     }
     
     CheckNullString(props) {
@@ -283,7 +404,7 @@ CreateTwitter(props) {
                     
                     <TabPane tab="FINANCIAL" key="4">
                     
-                    {this.CreateFinanceData(this.props.data.allCoinProfiles[0])}
+                    {this.CreateFinanceData(this.props.data)}
                     
                     </TabPane>
                     

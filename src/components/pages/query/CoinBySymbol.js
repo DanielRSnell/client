@@ -48,5 +48,18 @@ query GetCoin($symbol: String!) {
     low
     close
   }
+  coinstats(symbol: $symbol ) {
+    id
+    display_name
+    price_btc
+    price_eth
+    price_usd
+    price_ltc
+    market_cap
+    supply
+    volume
+    vwap_h24
+    rank
+  }
 }
 `;

@@ -106,7 +106,7 @@ class IcoTable extends Component {
 
      <Row type="flex" justify="center" span={24}>
 
-        <Col span={22} justify="center" type="flex">
+        <Col span={24} justify="center" type="flex">
         
             <Content style={{ background: '#fff', padding: 0, margin: 0, minHeight: 280 }}>
         
