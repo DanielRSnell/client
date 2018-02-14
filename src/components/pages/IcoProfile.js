@@ -452,7 +452,7 @@ class IcoProfile extends Component {
 
     CreateMarkup(props) {
       
-        const raw = props.about.split("<br />").join("<br /> &nbsp")
+        const raw = props.about.split("<br />").join("<br /> <br />")
         
         return { __html: raw }; 
 
