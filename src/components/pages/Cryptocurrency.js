@@ -8,6 +8,7 @@ import QuadBar from '../widgets/data/QuadBar';
 import { Timeline } from 'react-twitter-widgets';
 import TradingViewWidget from 'react-tradingview-widget';
 import * as n from 'numeral';
+import mixpanel from 'mixpanel-browser';
 
     const TabPane = Tabs.TabPane;
 
@@ -34,10 +35,11 @@ import * as n from 'numeral';
     
     }
 
-    componentDidMount() {
-        
-        
-    }
+    InitMix() {
+        console.log(`Mixpanel`);
+        mixpanel.init('d7b8b0e988ae095fe996e068780eac11');
+        mixpanel.track("Page View", {"Page": "Coin Page"});
+      }
 
 
     CreateMarkup(props) {
@@ -177,6 +179,8 @@ CreateTwitter(props) {
 
         if ( props.coinstats !== null || undefined ) {
         
+        if ( props.allCoinProfiles[0].compareList !== null || undefined ) {
+
         return ( <Row>
 
             <Row span={24}>
@@ -194,8 +198,9 @@ CreateTwitter(props) {
             <strong>Algorithm :</strong>{' '}
                 </Col>
                 <Col span={4}>
-            {!props.allCoinProfiles[0].compareList.algo}
+
             {this.CheckNullString(props.allCoinProfiles[0].compareList.algo)}
+            
                 </Col>
             </Row>
 
@@ -206,7 +211,6 @@ CreateTwitter(props) {
             <strong>Proof Type :</strong>{' '}
                 </Col>
                 <Col span={4}>
-            {!props.allCoinProfiles[0].compareList.prooftype}
             {this.CheckNullString(props.allCoinProfiles[0].compareList.prooftype)}
                 </Col>
             </Row>
@@ -273,8 +277,8 @@ CreateTwitter(props) {
         </Row>);
 
         }
-    
     }
+}
 
     LargeConvertDollar(props) {
 		if ( props !== null || undefined ) {
@@ -340,9 +344,14 @@ CreateTwitter(props) {
 
         return (
             <div>
-            {!data && <h1>Loading...</h1>}
+            {!data &&  <div className="example">    
+            <Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!">
+
+              </Spin>
+              </div>}
             {data && data.map( item => (
             <Layout className="container">
+            {this.InitMix()}
             <Row span={24}  style={{margin: 10}}>
             <Col span={22} push={1} style={{ padding: 0}}>
             <Col span={2}>

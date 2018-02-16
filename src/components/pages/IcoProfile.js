@@ -18,6 +18,7 @@ import IcoByName from './query/IcoByName';
 import m from 'moment';
 import n from 'numeral';
 import { Timeline } from 'react-twitter-widgets';
+import mixpanel from 'mixpanel-browser';
 
 const { Content } = Layout;
 const TabPane = Tabs.TabPane;
@@ -37,6 +38,12 @@ class IcoProfile extends Component {
             return <font color='blue'>{props}</font>
         }
     }
+
+    InitMix() {
+        console.log(`Mixpanel`);
+        mixpanel.init('d7b8b0e988ae095fe996e068780eac11');
+        mixpanel.track("Page View", {"Page": "ICO Page"});
+      }
 
     CountExperts(props) {
         const CountRatings = props.length;
@@ -471,7 +478,9 @@ class IcoProfile extends Component {
       </Spin>
       </div> }
    {data && <Layout className="profile-container" style={{margin: 20}}>
-        {console.log(data)}
+        
+        {this.InitMix()}
+
         <Row span={24}>
     
             <Col span={12} push={1}>

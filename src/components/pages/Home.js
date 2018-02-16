@@ -6,6 +6,7 @@ import CoinsRanked from '../widgets/tables/CoinsRanked';
 import SearchInput from '../widgets/function/SearchInput';
 import n from 'numeral';
 import m from 'moment';
+import mixpanel from 'mixpanel-browser';
 
 const Option = Select.Option;
 
@@ -16,6 +17,12 @@ class Home extends Component {
       toggle = (value) => {
       
       this.setState({ loading: value });
+    }
+
+    InitMix() {
+      console.log(`Mixpanel`);
+      mixpanel.init('d7b8b0e988ae095fe996e068780eac11');
+      mixpanel.track("Page View", {"Page": "Home"});
     }
 
     GetTime(props) {
@@ -78,6 +85,7 @@ class Home extends Component {
 
   }
 
+
     render() { 
 
       const data = this.props.coins;
@@ -86,6 +94,7 @@ class Home extends Component {
        return (
     <div>
       {!glob && <Content style={{margin: 10}}>
+      {this.InitMix()}
       <Row span={24} type="flex" className="filter-home">
       <Col span={5} style={{margin: 10}}>
       <Content className="home-global-item" style={{ padding: 0, margin: 5, minHeight: 48 }}>
@@ -113,9 +122,9 @@ class Home extends Component {
         <Col span={5} push={4} style={{margin: 10}}>
         <SearchInput className="search-input" data={this.props} placeholder="Search Your Coins" style={{ width: 215 }} />
           </Col>
-      </Row>
-      <Row>
-        <CoinsRanked data={this.props} loading={false} />
+      </Row> 
+      <Row className="example" justify="center">    
+      <Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!" />
       </Row>
     </Content>}
       {glob && 

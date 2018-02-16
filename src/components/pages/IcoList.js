@@ -5,6 +5,7 @@ import { Spin, Layout, Row, Col } from 'antd';
 import IcoTable from '../widgets/tables/IcoTable';
 import n from 'numeral';
 import m from 'moment';
+import mixpanel from 'mixpanel-browser';
 
 const { Content } = Layout;
 
@@ -14,6 +15,11 @@ class IcoList extends Component {
         loading: false,
     }
 
+    InitMix() {
+        console.log(`Mixpanel`);
+        mixpanel.init('d7b8b0e988ae095fe996e068780eac11');
+        mixpanel.track("Page View", {"Page": "ICO List"});
+      }
 
     render() {
         
@@ -40,6 +46,7 @@ class IcoList extends Component {
 
         return ( 
         <Content style={{margin: 10}}>
+        {this.InitMix()}
         <Row className="ico-table">
             <IcoTable icos={this.props} />
         </Row>
