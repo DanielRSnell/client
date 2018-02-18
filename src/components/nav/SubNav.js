@@ -13,6 +13,10 @@ class SubNav extends Component {
     });
   }
   render() {
+
+    console.log(`Checking Menu Props`);
+    console.log(this.props);
+
     return (
       <Menu
         theme="dark"
