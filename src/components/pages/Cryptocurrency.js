@@ -9,6 +9,7 @@ import { Timeline } from 'react-twitter-widgets';
 import TradingViewWidget from 'react-tradingview-widget';
 import * as n from 'numeral';
 import mixpanel from 'mixpanel-browser';
+import MetaTags from 'react-meta-tags';
 
     const TabPane = Tabs.TabPane;
 
@@ -353,6 +354,12 @@ CreateTwitter(props) {
             {data && data.map( item => (
             <Layout className="container">
             {this.InitMix()}
+            <MetaTags>
+      <title>{this.props.data.allCoinProfiles[0].name} - {this.props.data.allCoinProfiles[0].symbol} cryptocurrency data.</title>
+      <meta id="meta-description" name="description" content="Some description." />
+      <meta id="og-title" property="og:title" content="Hackcoin - Cryptocurrency Done Better." />
+      <meta id="og-image" property="og:image" content="https://cdn.shopify.com/s/files/1/2473/6554/files/Logo_2.png?6211363330978790612" />
+    </MetaTags>
             <Row span={24}  style={{margin: 10}}>
             <Col span={22} push={1} style={{ padding: 0}}>
             <Col span={2}>
