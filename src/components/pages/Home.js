@@ -7,6 +7,7 @@ import SearchInput from '../widgets/function/SearchInput';
 import n from 'numeral';
 import m from 'moment';
 import mixpanel from 'mixpanel-browser';
+import MetaTags from 'react-meta-tags';
 
 const Option = Select.Option;
 
@@ -94,6 +95,12 @@ class Home extends Component {
        return (
     <div>
       {!glob && <Content style={{margin: 10}}>
+      <MetaTags>
+      <title>Home</title>
+      <meta id="meta-description" name="description" content="Some description." />
+      <meta id="og-title" property="og:title" content="MyApp" />
+      <meta id="og-image" property="og:image" content="path/to/image.jpg" />
+    </MetaTags>
       {this.InitMix()}
       <Row span={24} type="flex" className="filter-home">
       <Col span={5} style={{margin: 10}}>

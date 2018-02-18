@@ -6125,6 +6125,12 @@ react-lazy-load@^3.0.12:
     lodash.throttle "^4.0.0"
     prop-types "^15.5.8"
 
+react-meta-tags@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-meta-tags/-/react-meta-tags-0.3.0.tgz#7d99e8629d42da97f1b9b974b11712a1b51eaec4"
+  dependencies:
+    prop-types "^15.6.0"
+
 react-moment@^0.6.8:
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.6.9.tgz#f13a0ccedaf65b5fb8b1467d9f91c5346d74c3e2"

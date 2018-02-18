@@ -341,6 +341,7 @@ CreateTwitter(props) {
     render() {    
 
         const data = this.props.data.allCoinProfiles;
+        console.log(data);
 
         return (
             <div>
