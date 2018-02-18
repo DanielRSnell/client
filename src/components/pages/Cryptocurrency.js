@@ -355,8 +355,8 @@ CreateTwitter(props) {
             <Layout className="container">
             {this.InitMix()}
             <MetaTags>
-      <title>{this.props.data.allCoinProfiles[0].name} - {this.props.data.allCoinProfiles[0].symbol} cryptocurrency data.</title>
-      <meta id="meta-description" name="description" content="Some description." />
+      <title>{this.props.data.allCoinProfiles[0].name} - {this.props.data.allCoinProfiles[0].symbol} cryptocurrency and blockchain data.</title>
+      <meta id="meta-description" name="description" content={`Learn about ${this.props.data.allCoinProfiles[0].symbol} cryptocurrency and other related blockchain projects and market data with the hackcoin crypto research community.`}/>
       <meta id="og-title" property="og:title" content="Hackcoin - Cryptocurrency Done Better." />
       <meta id="og-image" property="og:image" content="https://cdn.shopify.com/s/files/1/2473/6554/files/Logo_2.png?6211363330978790612" />
     </MetaTags>
