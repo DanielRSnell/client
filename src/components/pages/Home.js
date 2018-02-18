@@ -96,10 +96,10 @@ class Home extends Component {
     <div>
       {!glob && <Content style={{margin: 10}}>
       <MetaTags>
-      <title>Home</title>
+      <title>Hackcoin - Cryptocurrency Done Better.</title>
       <meta id="meta-description" name="description" content="Some description." />
-      <meta id="og-title" property="og:title" content="MyApp" />
-      <meta id="og-image" property="og:image" content="path/to/image.jpg" />
+      <meta id="og-title" property="og:title" content="Hackcoin - Cryptocurrency Done Better." />
+      <meta id="og-image" property="og:image" content="https://cdn.shopify.com/s/files/1/2473/6554/files/Logo_2.png?6211363330978790612" />
     </MetaTags>
       {this.InitMix()}
       <Row span={24} type="flex" className="filter-home">
