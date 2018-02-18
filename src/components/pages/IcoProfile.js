@@ -459,9 +459,19 @@ class IcoProfile extends Component {
 
     CreateMarkup(props) {
       
+        if ( props.about !== null || undefined ) {
+       
         const raw = props.about.split("<br />").join("<br /> <br />")
         
         return { __html: raw }; 
+
+    } else {
+
+        const raw = "<h3>There is no content available</h3>";
+
+        return { __html: raw };
+
+    }
 
     }
 
