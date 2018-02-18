@@ -64,6 +64,7 @@ class Home extends Component {
 	render() {
 		const data = this.props.coins;
 		const glob = this.props.coins.global;
+		console.log(window);
 
 		return (
 			<div>
@@ -197,4 +198,3 @@ const query = gql`
 `;
 
 export default graphql(query, { name: 'coins' })(Home);
-

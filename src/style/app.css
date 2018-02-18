@@ -10,6 +10,10 @@
     margin: 1em!important;
 }
 
+.mobile-logo {
+  width: 8em;
+}
+
 .example {
     text-align: center;
     background: rgba(0,0,0,0.05);
@@ -25,7 +29,7 @@
     line-height: 160px;
     background: #364d79;
   }
-  
+
   .ant-carousel .slick-slide h3 {
     color: #fff;
   }

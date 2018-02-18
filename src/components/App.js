@@ -1,18 +1,16 @@
-
 // Required
 /* eslint guard-for-in: 0 */
 /* eslint no-console: 0 */
 // or just take everything!
-// Reqirements 
+// Reqirements
 
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Layout, Row } from 'antd';
 import '../style/app.css';
 import 'antd/dist/antd.css';
-
-
-// Navigation 
+import 'antd-mobile/dist/antd-mobile.css';
+// Navigation
 
 import MainNav from './nav/MainNav';
 import SubNav from './nav/SubNav';
@@ -30,41 +28,73 @@ import IcoProfile from './pages/IcoProfile';
 
 import IcoList from './pages/IcoList';
 
-// Testing Grounds - Where we build things 
+// Testing Grounds - Where we build things
 import Test from '../test/test';
+
+// Mobile Imports
+import MobileNav from './mobile/nav';
+import MobileHome from './mobile/home/home';
+
 const { Footer } = Layout;
 
 // View State Starts Here
 
 class App extends Component {
+	constructor() {
+		super();
+		this.state = {
+			width: window.innerWidth
+		};
+	}
 
-// Antd Design Specification Grid 
-	
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleWindowSizeChange);
+	}
+
+	handleWindowSizeChange = () => {
+		this.setState({ width: window.innerWidth });
+	};
+
 	render() {
-		
-		return (
-		<Layout>
-				<BrowserRouter>
-					
-					<Row>					
-					<MainNav />
-					<SubNav />
+		const { width } = this.state;
+		const isMobile = width <= 500;
+
+		if (isMobile) {
+			return (
+				<Layout>
+					<BrowserRouter>
+						<Row>
+							<MobileNav />
+							<Route exact={true} path="/" component={MobileHome} />
+						</Row>
+					</BrowserRouter>
+				</Layout>
+			);
+		} else {
+			return (
+				<Layout>
+					<BrowserRouter>
+						<Row>
+							<MainNav />
+							<SubNav />
 							<Route exact={true} path="/" component={Home} />
-							<Route exact={true} path="/cryptocurrency/:id" component={Cryptocurrency} />
+							<Route
+								exact={true}
+								path="/cryptocurrency/:id"
+								component={Cryptocurrency}
+							/>
 							<Route exact={true} path="/all-icos" component={IcoList} />
 							<Route exact={true} path="/ico/:id" component={IcoProfile} />
 							<Route exact={true} path="/test" component={Test} />
 							<Footer style={{ textAlign: 'center' }}>
-
-							<strong>Hackcoin</strong> ©2017 <strong>Kickass Data</strong> and <strong>Unicorns</strong>.
-						  </Footer>
+								<strong>Hackcoin</strong> ©2017 <strong>Kickass Data</strong>{' '}
+								and <strong>Unicorns</strong>.
+							</Footer>
 						</Row>
-					
-				</BrowserRouter>
-
-      </Layout>
-    
-		);
+					</BrowserRouter>
+				</Layout>
+			);
+		}
 	}
 }
 // eslint-disable-next-line
