@@ -62,7 +62,6 @@ class CoinList extends Component {
 	}
 
 	ConvertColor(props) {
-		console.log(props);
 		if (props !== null || undefined) {
 			const check = props.toString().includes('-');
 
