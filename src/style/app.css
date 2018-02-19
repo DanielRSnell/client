@@ -59,6 +59,9 @@
   border-bottom: 1px solid #ddd;
 }
 
+.am-card {
+  margin: 1em;
+}
 .cards-home {
     padding-bottom: 2em;
 }

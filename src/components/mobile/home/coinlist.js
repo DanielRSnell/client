@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { SearchBar, Button, WhiteSpace, WingBlank, Card } from 'antd-mobile';
+import { Divider } from 'antd';
+import {
+	SearchBar,
+	Button,
+	WhiteSpace,
+	WingBlank,
+	Card,
+	Flex
+} from 'antd-mobile';
 import n from 'numeral';
 
 class CoinList extends Component {
@@ -53,6 +61,21 @@ class CoinList extends Component {
 		}
 	}
 
+	ConvertColor(props) {
+		console.log(props);
+		if (props !== null || undefined) {
+			const check = props.toString().includes('-');
+
+			if (check !== true) {
+				return <font color="red">{props}</font>;
+			} else {
+				return <font color="green">{props}</font>;
+			}
+		} else {
+			return 'N/A';
+		}
+	}
+
 	render() {
 		console.log(this.props);
 		return (
@@ -77,6 +100,25 @@ class CoinList extends Component {
 									}.png`}
 									extra={`${this.ConvertDollar(item.price)}`}
 								/>
+								<Divider />
+								<Flex>
+									<Flex.Item>
+										<center>
+											<strong>H:</strong> {this.ConvertColor(item.hour)}
+										</center>
+									</Flex.Item>
+									<Flex.Item>
+										<center>
+											<strong>D:</strong> {this.ConvertColor(item.day)}
+										</center>
+									</Flex.Item>
+									<Flex.Item>
+										<center>
+											<strong>W:</strong> {this.ConvertColor(item.week)}
+										</center>
+									</Flex.Item>
+								</Flex>
+								<Divider />
 							</Card>
 						);
 						return createitem;
