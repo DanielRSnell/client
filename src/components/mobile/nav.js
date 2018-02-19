@@ -6,12 +6,7 @@ class MobileNav extends Component {
 	render() {
 		return (
 			<div className="container">
-				<NavBar
-					style={{ padding: 10 }}
-					mode="light"
-					icon={<Icon type="left" />}
-					onLeftClick={() => console.log('onLeftClick')}
-					rightContent={[<Icon key="1" type="ellipsis" />]}>
+				<NavBar style={{ padding: 10 }} mode="light">
 					<Link to={{ pathname: '/' }}>
 						<img
 							className="mobile-logo"

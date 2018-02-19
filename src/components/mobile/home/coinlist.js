@@ -118,6 +118,19 @@ class CoinList extends Component {
 									</Flex.Item>
 								</Flex>
 								<Divider />
+								<Card.Footer
+									content={
+										<div>
+											<strong>M:</strong> {this.ConvertDollar(item.marketcap)}
+										</div>
+									}
+									extra={
+										<div>
+											<strong>V:</strong> {this.ConvertDollar(item.volume)}
+										</div>
+									}
+								/>
+								<Divider />
 							</Card>
 						);
 						return createitem;
