@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import CoinList from './coinlist';
+import { Spin } from 'antd';
 import { WhiteSpace } from 'antd-mobile';
 
 class MobileHome extends Component {
@@ -10,7 +11,11 @@ class MobileHome extends Component {
 		const glob = this.props.coins.global;
 
 		if (this.props.coins.loading) {
-			return <div>Loading...</div>;
+			return (
+				<div className="example">
+					<Spin tip="HOLD YOUR UNICORNS! IT'S LOADING!" />
+				</div>
+			);
 		} else {
 			return (
 				<div className="flex-container">

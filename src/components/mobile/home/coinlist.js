@@ -37,6 +37,15 @@ class CoinList extends Component {
 		}
 	}
 
+	ConvertLargeDollar(props) {
+		if (props !== null || undefined) {
+			const number = n(props);
+			n.defaultFormat(`$0,0`);
+			const reFormat = number.format();
+			return reFormat;
+		}
+	}
+
 	onChange(value, props) {
 		console.log(value);
 		console.log(this.state);
@@ -103,17 +112,17 @@ class CoinList extends Component {
 								<Flex>
 									<Flex.Item>
 										<center>
-											<strong>H:</strong> {this.ConvertColor(item.hour)}
+											<strong>1H:</strong> {this.ConvertColor(item.hour)}
 										</center>
 									</Flex.Item>
 									<Flex.Item>
 										<center>
-											<strong>D:</strong> {this.ConvertColor(item.day)}
+											<strong>24H:</strong> {this.ConvertColor(item.day)}
 										</center>
 									</Flex.Item>
 									<Flex.Item>
 										<center>
-											<strong>W:</strong> {this.ConvertColor(item.week)}
+											<strong>7D:</strong> {this.ConvertColor(item.week)}
 										</center>
 									</Flex.Item>
 								</Flex>
@@ -121,16 +130,16 @@ class CoinList extends Component {
 								<Card.Footer
 									content={
 										<div>
-											<strong>M:</strong> {this.ConvertDollar(item.marketcap)}
+											<strong>M:</strong>{' '}
+											{this.ConvertLargeDollar(item.marketcap)}
 										</div>
 									}
 									extra={
 										<div>
-											<strong>V:</strong> {this.ConvertDollar(item.volume)}
+											<strong>V:</strong> {this.ConvertLargeDollar(item.volume)}
 										</div>
 									}
 								/>
-								<Divider />
 							</Card>
 						);
 						return createitem;
