@@ -66,6 +66,10 @@ class App extends Component {
 						<Row>
 							<MobileNav />
 							<Route exact={true} path="/" component={MobileHome} />
+							<Footer style={{ textAlign: 'center' }}>
+								<strong>Hackcoin</strong> ©2017 <strong>Kickass Data</strong>{' '}
+								and <strong>Unicorns</strong>.
+							</Footer>
 						</Row>
 					</BrowserRouter>
 				</Layout>
