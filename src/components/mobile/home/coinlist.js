@@ -75,9 +75,9 @@ class CoinList extends Component {
 			const check = props.toString().includes('-');
 
 			if (check !== true) {
-				return <font color="red">{props}</font>;
-			} else {
 				return <font color="green">{props}</font>;
+			} else {
+				return <font color="red">{props}</font>;
 			}
 		} else {
 			return 'N/A';
