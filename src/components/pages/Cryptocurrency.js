@@ -136,7 +136,7 @@ class Cryptocurrency extends Component {
 	CreateExchangeList(props) {
 		const Columns = [
 			{
-				title: 'NAME',
+				title: 'EXCHANGE',
 				dataIndex: 'exchange',
 				key: 'exchange'
 			},
