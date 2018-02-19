@@ -55,6 +55,10 @@
     padding-bottom: .25em;
 }
 
+.am-search {
+  border-bottom: 1px solid #ddd;
+}
+
 .cards-home {
     padding-bottom: 2em;
 }

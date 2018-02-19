@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import CoinList from './coinlist';
+import { WhiteSpace } from 'antd-mobile';
 
 class MobileHome extends Component {
 	render() {
@@ -11,7 +12,11 @@ class MobileHome extends Component {
 		if (this.props.coins.loading) {
 			return <div>Loading...</div>;
 		} else {
-			return <CoinList coins={data} />;
+			return (
+				<div className="flex-container">
+					<CoinList coins={data} />
+				</div>
+			);
 		}
 	}
 }
