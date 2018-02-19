@@ -94,7 +94,7 @@ class Home extends Component {
 								<Content
 									className="home-global-item"
 									style={{ padding: 0, margin: 5, minHeight: 48 }}>
-									<strong>TOTAL MARKETCAP:</strong>{' '}
+									<strong>MARKETCAP:</strong>{' '}
 									{this.CheckMarketCap(this.props.coins)}
 								</Content>
 							</Col>
@@ -102,16 +102,14 @@ class Home extends Component {
 								<Content
 									className="home-global-item"
 									style={{ padding: 0, margin: 5, minHeight: 48 }}>
-									<strong>DAILY VOLUME:</strong>{' '}
-									{this.CheckVolume(this.props.coins)}
+									<strong>VOLUME:</strong> {this.CheckVolume(this.props.coins)}
 								</Content>
 							</Col>
 							<Col span={5} style={{ margin: 10 }}>
 								<Content
 									className="home-global-item"
 									style={{ padding: 0, margin: 5, minHeight: 48 }}>
-									<strong>BITCOIN DOMINANCE:</strong>{' '}
-									{this.CheckDom(this.props.coins)}
+									<strong>DOMINANCE:</strong> {this.CheckDom(this.props.coins)}
 								</Content>
 							</Col>
 							<Col span={5} push={4} style={{ margin: 10 }}>
@@ -135,7 +133,7 @@ class Home extends Component {
 								<Content
 									className="home-global-item"
 									style={{ padding: 0, margin: 5, minHeight: 48 }}>
-									<strong>TOTAL MARKETCAP:</strong>{' '}
+									<strong>MARKETCAP:</strong>{' '}
 									{this.CheckMarketCap(this.props.coins)}
 								</Content>
 							</Col>
@@ -143,16 +141,14 @@ class Home extends Component {
 								<Content
 									className="home-global-item"
 									style={{ padding: 0, margin: 5, minHeight: 48 }}>
-									<strong>DAILY VOLUME:</strong>{' '}
-									{this.CheckVolume(this.props.coins)}
+									<strong>VOLUME:</strong> {this.CheckVolume(this.props.coins)}
 								</Content>
 							</Col>
 							<Col span={5} style={{ margin: 10 }}>
 								<Content
 									className="home-global-item"
 									style={{ padding: 0, margin: 5, minHeight: 48 }}>
-									<strong>BITCOIN DOMINANCE:</strong>{' '}
-									{this.CheckDom(this.props.coins)}
+									<strong>DOMINANCE:</strong> {this.CheckDom(this.props.coins)}
 								</Content>
 							</Col>
 							<Col span={5} push={4} style={{ margin: 10 }}>
