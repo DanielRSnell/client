@@ -3,7 +3,6 @@ import { graphql } from 'react-apollo';
 import { Layout, Row, Col, Tag, Spin, Divider, Tabs, Icon, Table } from 'antd';
 import CoinBySymbol from './query/CoinBySymbol';
 import CandleChart from '../widgets/charts/CandleStick';
-import TopBar from '../widgets/data/TopBar';
 import QuadBar from '../widgets/data/QuadBar';
 import { Timeline } from 'react-twitter-widgets';
 import TradingViewWidget from 'react-tradingview-widget';

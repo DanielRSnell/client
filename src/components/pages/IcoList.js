@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Spin, Layout, Row, Col } from 'antd';
+import { Spin, Layout, Row } from 'antd';
 import IcoTable from '../widgets/tables/IcoTable';
-import n from 'numeral';
-import m from 'moment';
 import mixpanel from 'mixpanel-browser';
 import MetaTags from 'react-meta-tags';
 

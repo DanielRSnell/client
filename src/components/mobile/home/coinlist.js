@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import { Divider } from 'antd';
-import {
-	SearchBar,
-	Button,
-	WhiteSpace,
-	WingBlank,
-	Card,
-	Flex
-} from 'antd-mobile';
+import { SearchBar, WhiteSpace, WingBlank, Card, Flex } from 'antd-mobile';
 import n from 'numeral';
 
 class CoinList extends Component {

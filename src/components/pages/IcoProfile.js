@@ -9,16 +9,13 @@ import {
 	Button,
 	Tooltip,
 	Tabs,
-	Radio,
 	List,
 	Avatar,
-	Rating,
 	Icon
 } from 'antd';
 import { graphql } from 'react-apollo';
 import IcoByName from './query/IcoByName';
 import m from 'moment';
-import n from 'numeral';
 import { Timeline } from 'react-twitter-widgets';
 import mixpanel from 'mixpanel-browser';
 import MetaTags from 'react-meta-tags';

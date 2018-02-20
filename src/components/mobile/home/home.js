@@ -3,7 +3,6 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import CoinList from './coinlist';
 import { Spin } from 'antd';
-import { WhiteSpace } from 'antd-mobile';
 import mixpanel from 'mixpanel-browser';
 import MetaTags from 'react-meta-tags';
 
@@ -16,7 +15,6 @@ class MobileHome extends Component {
 
 	render() {
 		const data = this.props.coins.allCoinProfiles;
-		const glob = this.props.coins.global;
 
 		if (this.props.coins.loading) {
 			return (
