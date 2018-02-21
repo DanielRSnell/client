@@ -38,7 +38,7 @@ class CoinsRanked extends Component {
 
 	componentWillMount() {
 		if (this.props.loading === false) {
-			this.setState({ PageSize: 100 });
+			this.setState({ PageSize: 2000 });
 			this.setState({ loading: false });
 		} else {
 			this.setState({ loading: true });
@@ -157,7 +157,7 @@ class CoinsRanked extends Component {
 		} else {
 
 			return ( <img className="table-image-2" src={`https://www.livecoinwatch.com/images/icons32/iota.png`} /> );
-			
+
 		}
 
 	}
