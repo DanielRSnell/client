@@ -68,26 +68,26 @@ class Home extends Component {
 
 		return (
 			<div>
+				<MetaTags>
+					<title>Hackcoin - Top Cryptocurrencies 2018.</title>
+					<meta
+						id="meta-description"
+						name="description"
+						content="Check out the top cryptocurrencies 2018 - Hackcoin provides information on ICOs, Blockchain, and open market cryptos data."
+					/>
+					<meta
+						id="og-title"
+						property="og:title"
+						content="Hackcoin - Cryptocurrency Done Better."
+					/>
+					<meta
+						id="og-image"
+						property="og:image"
+						content="https://cdn.shopify.com/s/files/1/2473/6554/files/Logo_2.png?6211363330978790612"
+					/>
+				</MetaTags>
 				{!glob && (
 					<Content style={{ margin: 10 }}>
-						<MetaTags>
-							<title>Hackcoin - Top Cryptocurrencies 2018.</title>
-							<meta
-								id="meta-description"
-								name="description"
-								content="Check out the top cryptocurrencies 2018 - Hackcoin provides information on ICOs, Blockchain, and open market cryptos data."
-							/>
-							<meta
-								id="og-title"
-								property="og:title"
-								content="Hackcoin - Cryptocurrency Done Better."
-							/>
-							<meta
-								id="og-image"
-								property="og:image"
-								content="https://cdn.shopify.com/s/files/1/2473/6554/files/Logo_2.png?6211363330978790612"
-							/>
-						</MetaTags>
 						{this.InitMix()}
 						<Row span={24} type="flex" className="filter-home">
 							<Col span={5} style={{ margin: 10 }}>
