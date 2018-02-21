@@ -126,7 +126,7 @@ class Cryptocurrency extends Component {
 			<img
 				className="coin-profile-image"
 				src={`https://files.coinmarketcap.com/static/img/coins/64x64/${
-					this.props.data.allCoinProfiles[0].cmc
+					this.props.data.allCoinProfiles[0].rank
 				}.png`}
 			/>
 		);
