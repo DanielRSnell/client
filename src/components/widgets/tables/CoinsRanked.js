@@ -182,7 +182,7 @@ class CoinsRanked extends Component {
 							size="default"
 							bordered={false}
 							indentSize={20}
-							pagination={{ pageSize: 100 }}
+							pagination={{ pageSize: 2000 }}
 							dataSource={data}
 							onRowClick={item => this.rowClickHandler(item.symbol)}
 							rowKey={item => item.id}
