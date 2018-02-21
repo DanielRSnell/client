@@ -184,6 +184,9 @@ const query = gql`
 			week
 			marketcap
 			volume
+			compareList {
+    		image
+  		}
 		}
 		global {
 			marketcap

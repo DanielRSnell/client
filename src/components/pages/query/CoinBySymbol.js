@@ -19,6 +19,9 @@ query GetCoin($symbol: String!) {
     hour
     day
     week
+    compareList {
+      image
+  	}
     compareExchangeses {
       exid
       volumeTo
@@ -39,7 +42,7 @@ query GetCoin($symbol: String!) {
     }
   }
   history(
-    symbol: $symbol, 
+    symbol: $symbol,
     currency: "USD",
   	limit: 365) {
     time

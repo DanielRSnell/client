@@ -148,8 +148,23 @@ class CoinsRanked extends Component {
 		}
 	}
 
+	CreateImageItem(props) {
+
+		if ( props !== "IOT" ) {
+
+			return ( <img className="table-image-2" src={`https://www.livecoinwatch.com/images/icons32/${props.toLowerCase()}.png`} /> );
+
+		} else {
+
+			return ( <img className="table-image-2" src={`https://www.livecoinwatch.com/images/icons32/iota.png`} /> );
+			
+		}
+
+	}
+
 	render() {
 		const data = this.props.data.coins.allCoinProfiles;
+		console.log(data);
 
 		return (
 			// <div> This is a test div </div>
@@ -183,13 +198,7 @@ class CoinsRanked extends Component {
 							<Column
 								key="id"
 								render={item => (
-									<img
-										src={
-											'https://files.coinmarketcap.com/static/img/coins/32x32/' +
-											item.rank +
-											'.png'
-										}
-									/>
+									this.CreateImageItem(item.symbol)
 								)}
 							/>
 

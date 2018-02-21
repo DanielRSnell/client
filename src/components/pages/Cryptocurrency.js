@@ -125,9 +125,7 @@ class Cryptocurrency extends Component {
 		return (
 			<img
 				className="coin-profile-image"
-				src={`https://files.coinmarketcap.com/static/img/coins/64x64/${
-					this.props.data.allCoinProfiles[0].rank
-				}.png`}
+				src={`https://www.livecoinwatch.com/images/icons64/${props.allCoinProfiles[0].symbol.toLowerCase()}.png`}
 			/>
 		);
 	}
