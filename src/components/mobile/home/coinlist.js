@@ -96,9 +96,7 @@ class CoinList extends Component {
 							<Card key={item.id}>
 								<Card.Header
 									title={<span>{item.name}</span>}
-									thumb={`https://files.coinmarketcap.com/static/img/coins/32x32/${
-										item.cmc
-									}.png`}
+									thumb={`https://www.livecoinwatch.com/images/icons32/${item.symbol.toLowerCase()}.png`}
 									extra={`${this.ConvertDollar(item.price)}`}
 								/>
 								<Divider />
