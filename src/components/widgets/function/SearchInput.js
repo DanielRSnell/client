@@ -1,97 +1,87 @@
-import React, { Component } from 'react';
-import { Link, history } from 'react-router-dom';
-import { Select, Divider } from 'antd';
+import React, { Component } from "react";
+import { Link, history } from "react-router-dom";
+import { Select, Divider } from "antd";
 
 const Option = Select.Option;
 
 class SearchInput extends Component {
   state = {
     data: [],
-    value: '',
-    store: [],
-  }
+    value: "",
+    store: []
+  };
 
   componentWillMount() {
-    if ( this.props.data.coins.loading !== true ) {
-    
+    if (this.props.data.coins.loading !== true) {
       this.prepSearch();
-
     }
-
   }
-  
+
   prepSearch(value) {
-    
-    if ( this.props.data.coins.loading === false ) {
+    if (this.props.data.coins.loading === false) {
+      const data = this.props.data.coins.allCoinProfiles;
 
-    const data = this.props.data.coins.allCoinProfiles;
-    
-    const Store = [];
+      const Store = [];
 
-            data.forEach(item => {
+      data.forEach(item => {
+        if (Store.length < 5) {
+          if (item.name && item.symbol !== undefined) {
+            const row = `${item.name + "-" + item.symbol}`.toLowerCase();
 
-              if ( Store.length < 5 ) {
-              
-              if ( item.name && item.symbol !== undefined ) {
-                
-              const row = `${item.name + '-' + item.symbol}`.toLowerCase();
-              
-              if ( value !== undefined ) { 
-
+            if (value !== undefined) {
               const low = value.toLowerCase();
 
               const check = row.includes(low);
 
-              if ( check === true ) {
-
-              Store.push({
-
-                value: `${item.symbol.toUpperCase()}`,
-                text: item.name,
-                id: item.symbol,
-                img: item.cmc
-
-              });
-
-              
+              if (check === true) {
+                Store.push({
+                  value: `${item.symbol.toUpperCase()}`,
+                  text: item.name,
+                  id: item.symbol,
+                  img: item.cmc
+                });
+              }
             }
-          
           }
-
         }
-      }
-  
-});
+      });
 
-    this.setState({ data: Store });
-
-  }
-    
+      this.setState({ data: Store });
+    }
   }
 
   handleChange = (value, id) => {
-   
     this.prepSearch(value);
 
-    this.setState({value: value});
-    
-  }
+    this.setState({ value: value });
+  };
 
   OnSelectHandler = (id, symbol) => {
     this.props.data.history.push(`/cryptocurrency/` + id.toUpperCase());
-  }
+  };
 
   render() {
-
-    const options = this.state.data.map(item => 
+    const options = this.state.data.map(item => (
       <Option key={item.value}>
-     <Link to={`/cryptocurrency/${item.id}`}>
-      {` `}<img src={"https://files.coinmarketcap.com/static/img/coins/32x32/" + item.img + ".png"} />
-      <span className="search-item">{` `}<strong><Divider type="vertical" />{' '}{item.text}</strong></span>
-      </Link>
+        <Link to={`/cryptocurrency/${item.id}`}>
+          {` `}
+          <img
+            src={
+              "https://www.livecoinwatch.com/images/icons32/" +
+              item.symbol.toLowerCase() +
+              ".png"
+            }
+          />
+          <span className="search-item">
+            {` `}
+            <strong>
+              <Divider type="vertical" /> {item.text}
+            </strong>
+          </span>
+        </Link>
       </Option>
-    );
-  
+    ));
+
     return (
       <Select
         mode="combobox"
