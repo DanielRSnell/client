@@ -38,7 +38,8 @@ class SearchInput extends Component {
                   value: `${item.symbol.toUpperCase()}`,
                   text: item.name,
                   id: item.symbol,
-                  img: item.cmc
+                  img: item.cmc,
+                  symbol: item.symbol
                 });
               }
             }
