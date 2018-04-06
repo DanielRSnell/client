@@ -163,8 +163,6 @@ class CoinsRanked extends Component {
 	}
 
 	render() {
-		const data = this.props.data.coins.allCoinProfiles;
-		console.log(data);
 
 		return (
 			// <div> This is a test div </div>
@@ -183,7 +181,7 @@ class CoinsRanked extends Component {
 							bordered={false}
 							indentSize={20}
 							pagination={{ pageSize: 2000 }}
-							dataSource={data}
+							dataSource={this.props.data.coins.fetchCoins}
 							onRowClick={item => this.rowClickHandler(item.symbol)}
 							rowKey={item => item.id}
 							onChange={this.handleChange}>

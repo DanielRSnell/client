@@ -19,7 +19,7 @@ class SearchInput extends Component {
 
   prepSearch(value) {
     if (this.props.data.coins.loading === false) {
-      const data = this.props.data.coins.allCoinProfiles;
+      const data = this.props.data.coins.fetchCoins;
 
       const Store = [];
 

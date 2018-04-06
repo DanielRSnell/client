@@ -14,7 +14,7 @@ class MobileHome extends Component {
 	}
 
 	render() {
-		const data = this.props.coins.allCoinProfiles;
+		const data = this.props.coins.fetchCoins;
 
 		if (this.props.coins.loading) {
 			return (
@@ -53,10 +53,9 @@ class MobileHome extends Component {
 
 const query = gql`
 	query Home {
-		allCoinProfiles(orderBy: rank_ASC) {
+		fetchCoins(coin: "all") {
 			id
 			rank
-			cmc
 			name
 			symbol
 			price
@@ -65,7 +64,7 @@ const query = gql`
 			week
 			marketcap
 			volume
-		}
+  		}
 		global {
 			marketcap
 			volume

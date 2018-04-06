@@ -172,10 +172,9 @@ class Home extends Component {
 
 const query = gql`
 	query Home {
-		allCoinProfiles(orderBy: rank_ASC) {
+		fetchCoins(coin: "all") {
 			id
 			rank
-			cmc
 			name
 			symbol
 			price
@@ -184,10 +183,7 @@ const query = gql`
 			week
 			marketcap
 			volume
-			compareList {
-    		image
-  		}
-		}
+  	}
 		global {
 			marketcap
 			volume
