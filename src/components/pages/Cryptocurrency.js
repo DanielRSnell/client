@@ -349,6 +349,7 @@ class Cryptocurrency extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		const data = this.props.data.allCoinProfiles;
 		console.log(data);
 

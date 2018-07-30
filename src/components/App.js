@@ -34,7 +34,7 @@ import Test from '../test/test';
 // Mobile Imports
 import MobileNav from './mobile/nav';
 import MobileHome from './mobile/home/home';
-
+import Status from './status';
 const { Footer } = Layout;
 
 // View State Starts Here
@@ -79,6 +79,7 @@ class App extends Component {
 				<Layout>
 					<BrowserRouter>
 						<Row>
+							<Status />
 							<MainNav />
 							<SubNav />
 							<Route exact={true} path="/" component={Home} />
